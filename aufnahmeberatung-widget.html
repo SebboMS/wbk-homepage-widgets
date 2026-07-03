@@ -1,0 +1,321 @@
+<style>
+.wbk { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 640px; margin: 0 auto; padding: 1.5rem 0; }
+.wbk * { box-sizing: border-box; margin: 0; padding: 0; }
+.wbk-screen { display: none; }
+.wbk-screen.wbk-active { display: block; }
+.wbk .question { font-size: 17px; font-weight: 500; color: #1a1a1a; margin: 0 0 1rem !important; line-height: 1.4; }
+.wbk ul.opts { list-style: none !important; display: flex !important; flex-direction: column !important; gap: 8px !important; margin: 0 !important; padding: 0 !important; }
+.wbk ul.opts li { margin: 0 !important; padding: 0 !important; list-style: none !important; }
+.wbk .opt {
+  background: #fff !important; border: 1px solid #d0d0d0 !important; border-radius: 12px !important;
+  padding: 14px 18px !important; text-align: left !important; cursor: pointer !important;
+  font-family: inherit !important; font-size: 15px !important; color: #1a1a1a !important;
+  display: grid !important;
+  grid-template-columns: 32px 1fr !important;
+  column-gap: 14px !important; row-gap: 4px !important;
+  align-items: start !important;
+  width: 100% !important; margin: 0 !important;
+}
+.wbk .opt:hover { border-color: #888 !important; background: #f5f5f5 !important; }
+.wbk .opt-icon { font-size: 22px; line-height: 1.2; text-align: center; grid-row: 1 / span 2; grid-column: 1; align-self: start; padding-top: 1px; }
+.wbk .opt-label { font-size: 15px; font-weight: 500; display: block; grid-column: 2; line-height: 1.35; }
+.wbk .opt-sub { font-size: 13px; color: #666; display: block; line-height: 1.5; grid-column: 2; }
+.wbk .card { background: #fff; border: 1px solid #d0d0d0; border-radius: 12px; padding: 20px 22px; }
+.wbk .card-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: #999; margin: 0 0 8px !important; }
+.wbk .card-title { font-size: 18px; font-weight: 500; color: #1a1a1a; margin: 0 0 14px !important; line-height: 1.35; }
+.wbk .row { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0 !important; border-top: 1px solid #eee; }
+.wbk .row:first-of-type { border-top: none; padding-top: 0 !important; }
+.wbk .key { font-size: 13px; color: #666; min-width: 90px; flex-shrink: 0; }
+.wbk .val { font-size: 13px; color: #1a1a1a; flex: 1; line-height: 1.6; }
+.wbk .val a { color: #185FA5; }
+.wbk .badge-blue { display: inline-block; background: #E6F1FB; color: #185FA5; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; margin: 0 0 14px !important; }
+.wbk .badge-green { display: inline-block; background: #E1F5EE; color: #0F6E56; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; margin: 0 0 14px !important; }
+.wbk .back { background: none !important; border: none !important; color: #666 !important; font-size: 13px !important; cursor: pointer !important; padding: 0 !important; margin: 0 0 1rem !important; font-family: inherit !important; display: block !important; }
+.wbk .back:hover { color: #1a1a1a !important; }
+.wbk .restart { background: none !important; border: 1px solid #d0d0d0 !important; border-radius: 8px !important; padding: 9px 16px !important; font-size: 13px !important; color: #666 !important; cursor: pointer !important; font-family: inherit !important; margin: 16px 0 0 !important; display: inline-block !important; }
+.wbk .restart:hover { color: #1a1a1a !important; border-color: #888 !important; }
+.wbk .prog { display: flex; gap: 5px; margin: 0 0 1.25rem !important; }
+.wbk .dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; display: inline-block; }
+.wbk .dot.done { background: #1D9E75; }
+.wbk .dot.on { background: #666; }
+.wbk .redir { margin: 18px 0 0 !important; border: 1px solid #9FE1CB; border-radius: 12px; padding: 16px 18px; background: #E1F5EE; }
+.wbk .redir p { font-size: 13px; font-weight: 500; color: #085041; margin: 0 0 8px !important; }
+.wbk .redir small { font-size: 12px; color: #0F6E56; line-height: 1.6; display: block; }
+.wbk .redir-btn { background: none !important; border: none !important; font-size: 12px !important; color: #0F6E56 !important; text-decoration: underline !important; cursor: pointer !important; font-family: inherit !important; padding: 6px 0 0 !important; display: block !important; margin: 0 !important; }
+.wbk .muted { color: #999; font-size: 12px; }
+/* --- Ausfall-/Vertretungs-Hinweis (datumsgesteuert) --- */
+.wbk .notice-warn {
+  display: none; align-items: center; gap: 12px;
+  background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px;
+  padding: 12px 16px; margin: 0 0 16px !important;
+}
+.wbk .notice-warn .nw-icon { font-size: 22px; flex-shrink: 0; }
+.wbk .notice-warn .nw-text { font-size: 14px; color: #92400e; line-height: 1.45; }
+.wbk .notice-warn .nw-text strong { color: #78350f; }
+.wbk .line-cancelled { text-decoration: line-through; color: #999 !important; }
+/* --- Ferienmodus (ab 16. Juli 2026) --- */
+.wbk .holiday-card { border: 1px solid #d0d0d0; border-radius: 12px; padding: 20px 22px; margin: 0 0 16px !important; }
+.wbk .holiday-card:last-child { margin-bottom: 0 !important; }
+.wbk .holiday-card .card-title { display: flex; align-items: center; gap: 10px; }
+.wbk .holiday-card .card-title .hc-icon { font-size: 20px; }
+.wbk .holiday-card.hc-pause { background: #F4F6F8; }
+.wbk .holiday-card.hc-nachreichen { border-color: #FDE68A; background: #FFFBEB; }
+.wbk .holiday-card.hc-nachreichen .card-title { color: #92400e; }
+.wbk .holiday-card.hc-next { border-color: #9FE1CB; background: #E1F5EE; }
+.wbk .holiday-card.hc-next .card-title { color: #0F6E56; }
+</style>
+<div id="wbk" class="wbk">
+  <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
+  <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
+  <!-- Screen 1: Wer? -->
+  <div id="wbk-0" class="wbk-screen wbk-active">
+    <div class="prog"><div class="dot on"> </div><div class="dot"> </div><div class="dot"> </div></div>
+    <p class="question">F&#252;r wen suchst du eine Beratung?</p>
+    <ul class="opts">
+      <li><button class="opt" data-go="wbk-beg"><span class="opt-icon">&#128101;</span><span class="opt-label">Ich komme mit einer Begleitperson</span><span class="opt-sub">z.B. mit Betreuer/in oder p&#228;dagogischer Begleitung</span></button></li>
+      <li><button class="opt" data-go="wbk-flu"><span class="opt-icon">&#127757;</span><span class="opt-label">Ich bin gefl&#252;chtet und habe keinen Schulabschluss</span><span class="opt-sub">I am a refugee and have no school leaving certificate &#183; &#1571;&#1606;&#1575; &#1604;&#1575;&#1580;&#1574; &#183; &#1604;&#1575; &#1588;&#1607;&#1575;&#1583;&#1577; &#1605;&#1583;&#1585;&#1587;&#1610;&#1577;</span></button></li>
+      <li><button class="opt" data-go="wbk-alg-ort"><span class="opt-icon">&#128100;</span><span class="opt-label">Ich suche allgemeine Beratung zum Bildungsangebot</span><span class="opt-sub">Erster Schulabschluss &#183; Erweiterter erster Schulabschluss &#183; Mittlerer Schulabschluss &#183; Fachhochschulreife &#183; Abitur</span></button></li>
+    </ul>
+  </div>
+  <!-- Screen: Ferienmodus (wird ab 16. Juli 2026 automatisch anstelle von wbk-0 aktiviert, siehe Script unten) -->
+  <div id="wbk-holiday" class="wbk-screen">
+    <div class="holiday-card hc-pause">
+      <div class="card-title"><span class="hc-icon">&#127796;</span>Wir sind aktuell in den Sommerferien</div>
+      <p style="font-size: 14px; color: #444; line-height: 1.6;">Die Anmeldephase f&#252;r das laufende Schuljahr ist am <strong>15. Juli 2026</strong> zu Ende gegangen. Die pers&#246;nliche Aufnahmeberatung macht bis zum Ende der Sommerferien (NRW: 20. Juli &#8211; 1. September 2026) Pause.</p>
+    </div>
+    <div class="holiday-card hc-nachreichen">
+      <div class="card-title"><span class="hc-icon">&#128357;</span>Sondersprechstunde: Nur Unterlagen nachreichen</div>
+      <div class="row" style="border-top: none; padding-top: 0 !important;"><span class="key">Zeit</span><span class="val">Mittwoch, 26. August 2026, 16.00 &#8211; 19.00 Uhr</span></div>
+      <div class="row"><span class="key">Berater*in</span><span class="val">Sebastian Aufdemkamp</span></div>
+      <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
+      <div class="row"><span class="key">Wichtig</span><span class="val">An diesem Termin ist <strong>keine Neuanmeldung mehr m&#246;glich</strong> &#8211; er dient ausschlie&#223;lich dazu, noch fehlende Unterlagen f&#252;r bereits angemeldete Bewerbungen nachzureichen.</span></div>
+    </div>
+    <div class="holiday-card hc-next">
+      <div class="card-title"><span class="hc-icon">&#128197;</span>Neue Beratungstermine folgen</div>
+      <p style="font-size: 14px; color: #085041; line-height: 1.6;">Zum Ende der Sommerferien ver&#246;ffentlichen wir hier die neuen Beratungstermine. Zu diesen kannst du dich dann f&#252;r das im <strong>Februar 2027</strong> beginnende <strong>Sommersemester 2027</strong> anmelden.</p>
+    </div>
+  </div>
+  <!-- Screen: Begleitung -> Ort -->
+  <div id="wbk-beg" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot on"> </div><div class="dot"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <p class="question">Wo m&#246;chtest du beraten werden?</p>
+    <ul class="opts">
+      <li><button class="opt" data-go="wbk-beg-ms"><span class="opt-icon">&#128205;</span><span class="opt-label">M&#252;nster (Hauptstelle)</span></button></li>
+      <li><button class="opt" data-go="wbk-beg-rh"><span class="opt-icon">&#128205;</span><span class="opt-label">Rheine (Au&#223;enstelle)</span></button></li>
+    </ul>
+  </div>
+  <!-- Endscreen: Gefl&#252;chtete -->
+  <div id="wbk-flu" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <div class="card">
+      <div class="card-label">Deine Beratung &#183; Your consultation &#183; &#1575;&#1587;&#1578;&#1588;&#1575;&#1585;&#1578;&#1603;</div>
+      <div class="card-title">Sprechstunde f&#252;r Gefl&#252;chtete</div>
+      <span class="badge-green">Kein Termin n&#246;tig &#183; No appointment needed &#183; &#1604;&#1575; &#1581;&#1575;&#1580;&#1577; &#1604;&#1605;&#1608;&#1593;&#1583;</span>
+      <div class="row"><span class="key">Berater*in</span><span class="val">Cylia B&#252;sching</span></div>
+      <div class="row"><span class="key">Zeit</span><span class="val">Mittwoch, 12.00 &#8211; 14.00 Uhr</span></div>
+      <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
+      <div class="row"><span class="key">Hinweis</span><span class="val">Einfach vorbeikommen &#8211; kein Termin erforderlich.<br><span class="muted">You can come by without an appointment on Wednesday between 12 and 2 pm.</span><br><span class="muted" dir="rtl">&#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1604;&#1602;&#1583;&#1608;&#1605; &#1583;&#1608;&#1606; &#1605;&#1608;&#1593;&#1583; &#1610;&#1608;&#1605; &#1575;&#1604;&#1571;&#1585;&#1576;&#1593;&#1575;&#1569; &#1576;&#1610;&#1606; &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; 12 &#1608;14.</span></span></div>
+    </div>
+    <button class="restart">&#8634; Neu starten</button>
+  </div>
+  <!-- Screen: Allgemein -> Ort -->
+  <div id="wbk-alg-ort" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot on"> </div><div class="dot"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <p class="question">Wo m&#246;chtest du beraten werden?</p>
+    <ul class="opts">
+      <li><button class="opt" data-go="wbk-alg-ms"><span class="opt-icon">&#128205;</span><span class="opt-label">M&#252;nster (Hauptstelle)</span><span class="opt-sub"><span style="display:inline-block;background:#E1F5EE;color:#0f6e56;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;">Alle Schulabschl&#252;sse</span></span></button></li>
+      <li><button class="opt" data-go="wbk-alg-rh"><span class="opt-icon">&#128205;</span><span class="opt-label">Rheine (Au&#223;enstelle)</span><span class="opt-sub"><span style="display:inline-block;background:#FEF3C7;color:#b45309;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;">Nur Fachhochschulreife & Abitur</span></span></button></li>
+    </ul>
+  </div>
+  <!-- Endscreen: Begleitung M&#252;nster -->
+  <div id="wbk-beg-ms" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <div class="card">
+      <div class="card-label">Deine Beratung</div>
+      <div class="card-title">Sprechstunde mit Begleitung &#8211; M&#252;nster</div>
+      <span class="badge-blue">Termin erforderlich</span>
+      <!-- Ausfall wegen Schulfest (datumsgesteuert, siehe Script unten) -->
+      <div id="wbk-kb-ausfall" class="notice-warn">
+        <span class="nw-icon">&#9888;&#65039;</span>
+        <span class="nw-text">Wegen des Schulfests am Nachmittag des <strong>15. Juli 2026</strong> entf&#228;llt an diesem Tag die Sprechstunde von <strong>Katja Klein &amp; Barbara Block</strong>.</span>
+      </div>
+      <div class="row"><span class="key">Berater*in</span><span class="val">Katja Klein & Barbara Block</span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val">Dienstag, 14.00 &#8211; 16.00 Uhr<br><span id="wbk-kb-line">Mittwoch, 13.30 &#8211; 15.00 Uhr</span></span></div>
+      <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
+      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://outlook.office365.com/owa/calendar/AufnahmeberatungamWeiterbildungskollegMnster@wbkmuenster.onmicrosoft.com/bookings/">&#128197; Online-Termin buchen</a></div>
+    </div>
+    <button class="restart">&#8634; Neu starten</button>
+  </div>
+  <!-- Endscreen: Begleitung Rheine -->
+  <div id="wbk-beg-rh" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <div class="card">
+      <div class="card-label">Deine Beratung</div>
+      <div class="card-title">Sprechstunde mit Begleitung &#8211; Rheine</div>
+      <span class="badge-blue">Termin erforderlich</span>
+      <div class="row"><span class="key">Berater*in</span><span class="val">Boris R&#252;ping</span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val">Montag, 16.15 &#8211; 17.15 Uhr<br>Montag, 19.45 &#8211; 20.45 Uhr</span></div>
+      <div class="row"><span class="key">Ort</span><span class="val">Sekretariat des Abendgymnasiums<br>Kopernikusstra&#223;e 61, Rheine</span></div>
+      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://outlook.office365.com/owa/calendar/AufnahmeberatungamWeiterbildungskollegMnster@wbkmuenster.onmicrosoft.com/bookings/">&#128197; Online-Termin buchen</a></div>
+    </div>
+    <button class="restart">&#8634; Neu starten</button>
+  </div>
+  <!-- Endscreen: Allgemein M&#252;nster -->
+  <div id="wbk-alg-ms" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <div class="card">
+      <div class="card-label">Deine Beratung</div>
+      <div class="card-title">Allgemeine Aufnahmeberatung &#8211; M&#252;nster</div>
+      <!-- Ausfall-Hinweis (datumsgesteuert, siehe Script unten) -->
+      <div id="wbk-ns-ausfall" class="notice-warn">
+        <span class="nw-icon">&#9888;&#65039;</span>
+        <span class="nw-text">Am <strong>Montag, 6. Juli 2026</strong> entf&#228;llt die Sprechstunde von <strong>Nicole Schneider</strong> (Mo, 12.00 &#8211; 13.30 Uhr). Bitte weiche an diesem Tag auf die anderen aufgef&#252;hrten Sprechzeiten aus.</span>
+      </div>
+      <!-- Zeit&#228;nderung (datumsgesteuert, siehe Script unten) -->
+      <div id="wbk-sa-zeit" class="notice-warn">
+        <span class="nw-icon">&#128357;</span>
+        <span class="nw-text">Am <strong>Mittwoch, 1. Juli 2026</strong> beginnt die Sprechstunde von <strong>Sebastian Aufdemkamp</strong> wegen einer Abiturpr&#252;fung ausnahmsweise erst um <strong>10.30 Uhr</strong> (statt 10.15 Uhr).</span>
+      </div>
+      <!-- Ausfall wegen Schulfest (datumsgesteuert, siehe Script unten) -->
+      <div id="wbk-pt-ausfall" class="notice-warn">
+        <span class="nw-icon">&#9888;&#65039;</span>
+        <span class="nw-text">Wegen des Schulfests am Nachmittag des <strong>15. Juli 2026</strong> entf&#228;llt an diesem Tag die Sprechstunde von <strong>Philipp Terwey</strong>.</span>
+      </div>
+      <div style="background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 8px; padding: 12px 16px; margin: 0 0 16px !important; display: flex; align-items: center; gap: 12px;"><span style="font-size: 22px; flex-shrink: 0;">&#9989;</span><span style="font-size: 14px; font-weight: 500; color: #085041; line-height: 1.4;">Kein Termin erforderlich &#8211; einfach zu den Sprechzeiten vorbeikommen.</span></div>
+      <div class="row"><span class="key">Berater*in</span><span class="val">Nicole Schneider, Sebastian Aufdemkamp oder Philipp Terwey</span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val"><span id="wbk-ns-line">Mo, 12.00 &#8211; 13.30 Uhr <span class="muted">(Nicole Schneider)</span></span><br><span id="wbk-sa-line">Mi, <span id="wbk-sa-time">10.15 &#8211; 11.45</span> Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span><br><span id="wbk-pt-line">Mi, 17.30 &#8211; 19.00 Uhr <span class="muted">(Philipp Terwey)</span></span></span></div>
+      <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
+    </div>
+    <div class="redir">
+      <p>&#127757; Bist du gefl&#252;chtet und hast noch keinen Schulabschluss? F&#252;r dich gibt es eine eigene Sprechstunde.</p>
+      <small>Are you a refugee without a school diploma? There is a dedicated consultation hour for you.<br>&#1607;&#1604; &#1571;&#1606;&#1578; &#1604;&#1575;&#1580;&#1574; &#1608;&#1604;&#1610;&#1587; &#1604;&#1583;&#1610;&#1603; &#1588;&#1607;&#1575;&#1583;&#1577; &#1605;&#1583;&#1585;&#1587;&#1610;&#1577;&#1567; &#1607;&#1606;&#1575;&#1603; &#1587;&#1575;&#1593;&#1577; &#1575;&#1587;&#1578;&#1588;&#1575;&#1585;&#1577; &#1605;&#1582;&#1589;&#1589;&#1577; &#1604;&#1603;.</small>
+      <button class="redir-btn" data-go="wbk-flu">&#8594; Zur richtigen Sprechstunde wechseln</button>
+    </div>
+    <button class="restart">&#8634; Neu starten</button>
+  </div>
+  <!-- Endscreen: Allgemein Rheine -->
+  <div id="wbk-alg-rh" class="wbk-screen">
+    <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
+    <button class="back">&#8592; zur&#252;ck</button>
+    <div class="card">
+      <div class="card-label">Deine Beratung</div>
+      <div class="card-title">Aufnahmeberatung &#8211; Rheine</div>
+      <p style="font-size: 13px; color: #b45309; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px; padding: 10px 14px; margin: 0 0 14px !important;">In Rheine werden ausschlie&#223;lich die Bildungsg&#228;nge <strong>Fachhochschulreife</strong> und <strong>Abitur</strong> angeboten.</p>
+      <span class="badge-blue">Termin erforderlich</span>
+      <div class="row"><span class="key">Berater*in</span><span class="val">Boris R&#252;ping</span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val">Montag, 16.15 &#8211; 17.15 Uhr<br>Montag, 19.45 &#8211; 20.45 Uhr</span></div>
+      <div class="row"><span class="key">Ort</span><span class="val">Sekretariat des Abendgymnasiums<br>Kopernikusstra&#223;e 61, Rheine</span></div>
+      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://outlook.office365.com/owa/calendar/AufnahmeberatungamWeiterbildungskollegMnster@wbkmuenster.onmicrosoft.com/bookings/">&#128197; Online-Termin buchen</a></div>
+    </div>
+    <button class="restart">&#8634; Neu starten</button>
+  </div>
+</div>
+<script>
+(function(){
+  var root = document.getElementById('wbk');
+  if (!root || root._wbkInit) return;
+  root._wbkInit = true;
+  var hist = ['wbk-0'];
+  function show(id){
+    var screens = root.querySelectorAll('.wbk-screen');
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove('wbk-active');
+    var el = document.getElementById(id);
+    if (el) el.classList.add('wbk-active');
+    try { window.scrollTo({ top: root.getBoundingClientRect().top + window.scrollY - 20, behavior: 'smooth' }); } catch(e) {}
+  }
+  function go(id){
+    if (hist[hist.length - 1] !== id) hist.push(id);
+    show(id);
+  }
+  root.addEventListener('click', function(e){
+    var back = e.target.closest && e.target.closest('.back');
+    if (back) { e.preventDefault(); hist.pop(); show(hist[hist.length - 1] || 'wbk-0'); return; }
+    var rs = e.target.closest && e.target.closest('.restart');
+    if (rs) { e.preventDefault(); hist = ['wbk-0']; show('wbk-0'); return; }
+    var btn = e.target.closest && e.target.closest('[data-go]');
+    if (btn) { e.preventDefault(); var target = btn.getAttribute('data-go'); if (target) go(target); }
+  });
+
+  /* --- Datumsgesteuerte Ausfall-Hinweise ---
+     Jeder Eintrag wird nur im Zeitfenster [showFrom .. hideAfter) angezeigt.
+     Monate sind 0-basiert: 0 = Januar, 6 = Juli.
+     Zum Hinzuf&#252;gen weiterer Ausf&#228;lle einfach einen neuen Eintrag erg&#228;nzen. */
+  var ausfaelle = [
+    {
+      noticeId: 'wbk-ns-ausfall',                 // Hinweis-Box, die eingeblendet wird
+      lineId:   'wbk-ns-line',                    // Zeile, die durchgestrichen wird (optional, '' = keine)
+      showFrom:  new Date(2026, 5, 29, 13, 30),   // direkt nach der letzten regul&#228;ren Sprechstunde (Mo, 29. Juni 2026, 13.30 Uhr)
+      hideAfter: new Date(2026, 6, 7)             // ab Dienstag, 7. Juli 2026, 00:00 wieder ausgeblendet
+    },
+    {
+      noticeId: 'wbk-pt-ausfall',                 // Schulfest am Nachmittag des 15. Juli: Sprechstunde Philipp Terwey entf&#228;llt
+      lineId:   'wbk-pt-line',
+      showFrom:  new Date(2026, 6, 8, 19, 0),     // direkt nach der letzten regul&#228;ren Sprechstunde (Mi, 8. Juli 2026, 19.00 Uhr)
+      hideAfter: new Date(2026, 6, 16)            // ab Donnerstag, 16. Juli 2026, 00:00 wieder ausgeblendet (Ferienmodus &#252;bernimmt ohnehin)
+    },
+    {
+      noticeId: 'wbk-kb-ausfall',                 // Schulfest am Nachmittag des 15. Juli: Sprechstunde Katja Klein & Barbara Block entf&#228;llt
+      lineId:   'wbk-kb-line',
+      showFrom:  new Date(2026, 6, 8, 15, 0),     // direkt nach der letzten regul&#228;ren Sprechstunde (Mi, 8. Juli 2026, 15.00 Uhr)
+      hideAfter: new Date(2026, 6, 16)            // ab Donnerstag, 16. Juli 2026, 00:00 wieder ausgeblendet (Ferienmodus &#252;bernimmt ohnehin)
+    }
+  ];
+  var now = new Date();
+
+  /* --- Ferienmodus ---
+     Ab diesem Zeitpunkt (16. Juli 2026, 00:00 - direkt nach Ende der Anmeldephase am 15. Juli)
+     zeigt das Widget keine Terminbuchung mehr, sondern nur noch die Ferien-Hinweise. */
+  var holidayModeFrom = new Date(2026, 6, 16);
+  if (now >= holidayModeFrom) {
+    hist = ['wbk-holiday'];
+    show('wbk-holiday');
+    var heading = document.getElementById('wbk-heading');
+    var intro = document.getElementById('wbk-intro');
+    if (heading) heading.textContent = 'Aufnahmeberatung in den Sommerferien';
+    if (intro) intro.textContent = 'Die Anmeldephase ist beendet \u2013 hier findest du alle Infos zur Sondersprechstunde und zu den n\u00e4chsten Beratungsterminen.';
+  }
+
+  for (var i = 0; i < ausfaelle.length; i++) {
+    var a = ausfaelle[i];
+    if (now >= a.showFrom && now < a.hideAfter) {
+      var box = document.getElementById(a.noticeId);
+      if (box) box.style.display = 'flex';
+      if (a.lineId) {
+        var line = document.getElementById(a.lineId);
+        if (line) line.classList.add('line-cancelled');
+      }
+    }
+  }
+
+  /* --- Datumsgesteuerte Zeit&#228;nderungen ---
+     Wie oben, blendet aber einen Hinweis ein und ersetzt die angezeigte Uhrzeit
+     (timeId) im Zeitfenster [showFrom .. hideAfter) durch newTime.
+     Monate sind 0-basiert: 0 = Januar, 6 = Juli. */
+  var aenderungen = [
+    {
+      noticeId: 'wbk-sa-zeit',                    // Hinweis-Box, die eingeblendet wird
+      timeId:   'wbk-sa-time',                    // Uhrzeit-Span, der ersetzt wird (optional, '' = keiner)
+      newTime:  '10.30 \u2013 11.45',            // Ersatz-Uhrzeit (\u2013 = Gedankenstrich, ASCII-sicher)
+      showFrom:  new Date(2026, 5, 24, 11, 45),   // direkt nach der vorigen Sprechstunde (Mi, 24. Juni 2026, 11.45 Uhr)
+      hideAfter: new Date(2026, 6, 2)             // ab Donnerstag, 2. Juli 2026, 00:00 wieder normal
+    }
+  ];
+  for (var k = 0; k < aenderungen.length; k++) {
+    var c = aenderungen[k];
+    if (now >= c.showFrom && now < c.hideAfter) {
+      var cbox = document.getElementById(c.noticeId);
+      if (cbox) cbox.style.display = 'flex';
+      if (c.timeId && c.newTime) {
+        var t = document.getElementById(c.timeId);
+        if (t) t.textContent = c.newTime;
+      }
+    }
+  }
+})();
+</script>
