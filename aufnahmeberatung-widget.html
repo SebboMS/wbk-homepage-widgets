@@ -53,6 +53,15 @@
 .wbk .notice-warn .nw-text { font-size: 14px; color: #92400e; line-height: 1.45; }
 .wbk .notice-warn .nw-text strong { color: #78350f; }
 .wbk .line-cancelled { text-decoration: line-through; color: #999 !important; }
+/* --- Anmeldeschluss-Hinweis (datumsgesteuert, verschwindet zum Ferienmodus) --- */
+.wbk .deadline-banner {
+  display: none; align-items: center; gap: 12px;
+  background: #E6F1FB; border: 1px solid #A9CDEB; border-radius: 12px;
+  padding: 14px 18px; margin: 0 0 1.5rem !important;
+}
+.wbk .deadline-banner .db-icon { font-size: 22px; flex-shrink: 0; }
+.wbk .deadline-banner .db-text { font-size: 14px; color: #185FA5; line-height: 1.45; }
+.wbk .deadline-banner .db-text strong { color: #0d4a85; }
 /* --- Ferienmodus (ab 16. Juli 2026) --- */
 .wbk .holiday-card { border: 1px solid #d0d0d0; border-radius: 12px; padding: 20px 22px; margin: 0 0 16px !important; }
 .wbk .holiday-card:last-child { margin-bottom: 0 !important; }
@@ -67,6 +76,11 @@
 <div id="wbk" class="wbk">
   <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
   <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
+  <!-- Anmeldeschluss-Hinweis (datumsgesteuert, siehe Script unten) -->
+  <div id="wbk-deadline" class="deadline-banner">
+    <span class="db-icon">&#9203;</span>
+    <span class="db-text">Letzte Gelegenheit zur Anmeldung: Eine Anmeldung f&#252;r das laufende Schuljahr ist nur noch bis <strong>Mittwoch, 15. Juli 2026</strong> m&#246;glich. Danach beginnt die Sommerpause.</span>
+  </div>
   <!-- Screen 1: Wer? -->
   <div id="wbk-0" class="wbk-screen wbk-active">
     <div class="prog"><div class="dot on"> </div><div class="dot"> </div><div class="dot"> </div></div>
@@ -177,6 +191,11 @@
         <span class="nw-icon">&#9888;&#65039;</span>
         <span class="nw-text">Am <strong>Montag, 6. Juli 2026</strong> entf&#228;llt die Sprechstunde von <strong>Nicole Schneider</strong> (Mo, 12.00 &#8211; 13.30 Uhr). Bitte weiche an diesem Tag auf die anderen aufgef&#252;hrten Sprechzeiten aus.</span>
       </div>
+      <!-- Ausfall aus dienstlichen Gr&#252;nden (datumsgesteuert, siehe Script unten) -->
+      <div id="wbk-ns-ausfall2" class="notice-warn">
+        <span class="nw-icon">&#9888;&#65039;</span>
+        <span class="nw-text">Am <strong>Montag, 13. Juli 2026</strong> entf&#228;llt die Sprechstunde von <strong>Nicole Schneider</strong> (Mo, 12.00 &#8211; 13.30 Uhr) aus dienstlichen Gr&#252;nden. Bitte weiche an diesem Tag auf die anderen aufgef&#252;hrten Sprechzeiten aus.</span>
+      </div>
       <!-- Zeit&#228;nderung (datumsgesteuert, siehe Script unten) -->
       <div id="wbk-sa-zeit" class="notice-warn">
         <span class="nw-icon">&#128357;</span>
@@ -254,6 +273,12 @@
       hideAfter: new Date(2026, 6, 7)             // ab Dienstag, 7. Juli 2026, 00:00 wieder ausgeblendet
     },
     {
+      noticeId: 'wbk-ns-ausfall2',                // Nicole Schneider entf&#228;llt am 13. Juli aus dienstlichen Gr&#252;nden
+      lineId:   'wbk-ns-line',
+      showFrom:  new Date(2026, 6, 7),            // ab Dienstag, 7. Juli 2026, 00:00 (nahtlos nach dem 6.-Juli-Hinweis)
+      hideAfter: new Date(2026, 6, 14)            // ab Dienstag, 14. Juli 2026, 00:00 wieder ausgeblendet
+    },
+    {
       noticeId: 'wbk-pt-ausfall',                 // Schulfest am Nachmittag des 15. Juli: Sprechstunde Philipp Terwey entf&#228;llt
       lineId:   'wbk-pt-line',
       showFrom:  new Date(2026, 6, 8, 19, 0),     // direkt nach der letzten regul&#228;ren Sprechstunde (Mi, 8. Juli 2026, 19.00 Uhr)
@@ -279,6 +304,17 @@
     var intro = document.getElementById('wbk-intro');
     if (heading) heading.textContent = 'Aufnahmeberatung in den Sommerferien';
     if (intro) intro.textContent = 'Die Anmeldephase ist beendet \u2013 hier findest du alle Infos zur Sondersprechstunde und zu den n\u00e4chsten Beratungsterminen.';
+  }
+
+  /* --- Anmeldeschluss-Hinweis ---
+     Erinnert bis zum Ende der Anmeldephase daran, dass der 15. Juli 2026 der
+     letzte Anmeldetag ist. Verschwindet automatisch, sobald der Ferienmodus greift.
+     Monate sind 0-basiert: 0 = Januar, 6 = Juli. */
+  var deadlineFrom  = new Date(2026, 6, 1);   // ab Mittwoch, 1. Juli 2026, 00:00
+  var deadlineUntil = new Date(2026, 6, 16);  // bis einschl. 15. Juli; ab 16. Juli 00:00 aus (Ferienmodus &#252;bernimmt)
+  if (now >= deadlineFrom && now < deadlineUntil) {
+    var db = document.getElementById('wbk-deadline');
+    if (db) db.style.display = 'flex';
   }
 
   for (var i = 0; i < ausfaelle.length; i++) {
