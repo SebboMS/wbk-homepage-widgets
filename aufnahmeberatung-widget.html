@@ -116,7 +116,7 @@
       <p style="font-size: 14px; color: #085041; line-height: 1.6; margin: 0 0 12px !important;">Ab <strong>Montag, 7. September 2026</strong> gelten neue Sprechzeiten (in der ersten Schulwoche findet noch keine Beratung statt). Zu diesen Sprechstunden kannst du dich f&#252;r das im <strong>Februar 2027</strong> beginnende <strong>Sommersemester 2027</strong> anmelden:</p>
       <div class="row" style="border-top: none; padding-top: 0 !important;"><span class="key">M&#252;nster</span><span class="val">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br>Donnerstag, 13.00 &#8211; 14.30 Uhr <span class="muted">(Nicole Schneider)</span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span><br>Mittwoch, 12.00 &#8211; 13.30 Uhr <span class="muted">(Cylia B&#252;sching &#8211; Sprechstunde f&#252;r Gefl&#252;chtete)</span></span></div>
       <div class="row"><span class="key">Rheine</span><span class="val">Donnerstag, 19.00 &#8211; 21.00 Uhr <span class="muted">(Boris R&#252;ping, Termin erforderlich)</span></span></div>
-      <p style="font-size: 13px; color: #0F6E56; line-height: 1.6; margin: 12px 0 0 !important;">Bewerber*innen mit Begleitperson kommen bitte zu einer der M&#252;nster-Sprechstunden (Philipp Terwey, Nicole Schneider oder Sebastian Aufdemkamp) und informieren Katja Klein vorab per E-Mail.</p>
+      <p style="font-size: 13px; color: #0F6E56; line-height: 1.6; margin: 12px 0 0 !important;">Bewerber*innen mit Begleitperson kommen bitte zu einer der M&#252;nster-Sprechstunden (Philipp Terwey, Nicole Schneider oder Sebastian Aufdemkamp) und informieren Katja Klein vorab per E-Mail: <a id="wbk-kk-mail-2" class="wbk-kk-mail" href="mailto:kleinka@wbk.ms.de" style="color: #0F6E56; font-weight: 600; text-decoration: underline;">E-Mail an Katja Klein schreiben</a>.</p>
     </div>
     </div>
   </div>
@@ -176,7 +176,7 @@
         <div>
           <p class="step-head">Sagt Katja Klein vorher per E-Mail Bescheid, dass ihr kommt.</p>
           <p class="step-body" style="margin: 0 0 10px !important;">So wei&#223; das Beratungsteam vorab, dass ihr zu einer der oben genannten Sprechstunden kommt.</p>
-          <a id="wbk-kk-mail" style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="mailto:kleinka@wbk.ms.de">&#9993; E-Mail an Katja Klein schreiben</a>
+          <a id="wbk-kk-mail" class="wbk-kk-mail" style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="mailto:kleinka@wbk.ms.de">&#9993; E-Mail an Katja Klein schreiben</a>
         </div>
       </div>
       <div class="row" style="margin-top: 18px;"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
@@ -265,11 +265,12 @@
   /* --- E-Mail-Link an Katja Klein (Beratung mit Begleitperson) ---
      Betreff und Text werden hier zusammengebaut und automatisch korrekt kodiert,
      damit Umlaute/Sonderzeichen im Mailprogramm sauber ankommen. */
-  var kkMail = document.getElementById('wbk-kk-mail');
-  if (kkMail) {
+  var kkMails = document.querySelectorAll('.wbk-kk-mail');
+  if (kkMails.length) {
     var kkSubject = 'Anmeldung mit Begleitperson \u2013 Ank\u00fcndigung';
     var kkBody = 'Guten Tag Frau Klein,\n\nich m\u00f6chte mich gemeinsam mit meiner Begleitperson zur Aufnahmeberatung anmelden und komme zu folgender Sprechstunde:\n\nName (Bewerber*in): \nName der Begleitperson: \nGew\u00fcnschte Sprechstunde (Berater*in / Wochentag): \n\nMit freundlichen Gr\u00fc\u00dfen';
-    kkMail.href = 'mailto:kleinka@wbk.ms.de?subject=' + encodeURIComponent(kkSubject) + '&body=' + encodeURIComponent(kkBody);
+    var kkHref = 'mailto:kleinka@wbk.ms.de?subject=' + encodeURIComponent(kkSubject) + '&body=' + encodeURIComponent(kkBody);
+    for (var m = 0; m < kkMails.length; m++) kkMails[m].href = kkHref;
   }
 
   /* --- Ferienmodus (16. Juli 2026 bis 31. August 2026) ---
