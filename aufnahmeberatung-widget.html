@@ -43,7 +43,7 @@
 .wbk .redir small { font-size: 12px; color: #0F6E56; line-height: 1.6; display: block; }
 .wbk .redir-btn { background: none !important; border: none !important; font-size: 12px !important; color: #0F6E56 !important; text-decoration: underline !important; cursor: pointer !important; font-family: inherit !important; padding: 6px 0 0 !important; display: block !important; margin: 0 !important; }
 .wbk .muted { color: #999; font-size: 12px; }
-/* --- Ausfall-/Vertretungs-Hinweis (datumsgesteuert) --- */
+/* --- Ausfall-/Vertretungs-Hinweis (datumsgesteuert, Ger&#252;st f&#252;r k&#252;nftige Ausf&#228;lle) --- */
 .wbk .notice-warn {
   display: none; align-items: center; gap: 12px;
   background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px;
@@ -53,7 +53,7 @@
 .wbk .notice-warn .nw-text { font-size: 14px; color: #92400e; line-height: 1.45; }
 .wbk .notice-warn .nw-text strong { color: #78350f; }
 .wbk .line-cancelled { text-decoration: line-through; color: #999 !important; }
-/* --- Anmeldeschluss-Hinweis (datumsgesteuert, verschwindet zum Ferienmodus) --- */
+/* --- Info-Banner oben (datumsgesteuert) --- */
 .wbk .deadline-banner {
   display: none; align-items: center; gap: 12px;
   background: #E6F1FB; border: 1px solid #A9CDEB; border-radius: 12px;
@@ -62,7 +62,7 @@
 .wbk .deadline-banner .db-icon { font-size: 22px; flex-shrink: 0; }
 .wbk .deadline-banner .db-text { font-size: 14px; color: #185FA5; line-height: 1.45; }
 .wbk .deadline-banner .db-text strong { color: #0d4a85; }
-/* --- Ferienmodus (ab 16. Juli 2026) --- */
+/* --- Ferienmodus (16. Juli - 31. August 2026) --- */
 .wbk .holiday-card { border: 1px solid #d0d0d0; border-radius: 12px; padding: 20px 22px; margin: 0 0 16px !important; }
 .wbk .holiday-card:last-child { margin-bottom: 0 !important; }
 .wbk .holiday-card .card-title { display: flex; align-items: center; gap: 10px; }
@@ -72,14 +72,19 @@
 .wbk .holiday-card.hc-nachreichen .card-title { color: #92400e; }
 .wbk .holiday-card.hc-next { border-color: #9FE1CB; background: #E1F5EE; }
 .wbk .holiday-card.hc-next .card-title { color: #0F6E56; }
+/* --- Schritt-Layout (Beratung mit Begleitperson) --- */
+.wbk .step { display: flex; gap: 12px; margin: 0 0 14px !important; }
+.wbk .step .step-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #185FA5; color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.wbk .step .step-head { font-size: 14px; font-weight: 500; color: #1a1a1a; margin: 0 0 6px !important; line-height: 1.4; }
+.wbk .step .step-body { font-size: 13px; color: #444; line-height: 1.7; margin: 0 !important; }
 </style>
 <div id="wbk" class="wbk">
   <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
   <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
-  <!-- Anmeldeschluss-Hinweis (datumsgesteuert, siehe Script unten) -->
-  <div id="wbk-deadline" class="deadline-banner">
-    <span class="db-icon">&#9203;</span>
-    <span class="db-text">Letzte Gelegenheit zur Anmeldung: Eine Anmeldung f&#252;r das kommende Schuljahr ist nur noch bis <strong>Mittwoch, 15. Juli 2026</strong> m&#246;glich. Danach beginnt die Sommerpause.</span>
+  <!-- Start-Hinweis zum Schuljahresbeginn (datumsgesteuert 1.-7. September 2026, siehe Script unten) -->
+  <div id="wbk-startinfo" class="deadline-banner">
+    <span class="db-icon">&#128197;</span>
+    <span class="db-text">Die Aufnahmeberatung startet ins neue Schuljahr: Die <strong>ersten Sprechstunden finden ab Montag, 7. September 2026</strong> statt &#8211; in der ersten Schulwoche findet noch keine Beratung statt.</span>
   </div>
   <!-- Screen 1: Wer? -->
   <div id="wbk-0" class="wbk-screen wbk-active">
@@ -91,13 +96,13 @@
       <li><button class="opt" data-go="wbk-alg-ort"><span class="opt-icon">&#128100;</span><span class="opt-label">Ich suche allgemeine Beratung zum Bildungsangebot</span><span class="opt-sub">Erster Schulabschluss &#183; Erweiterter erster Schulabschluss &#183; Mittlerer Schulabschluss &#183; Fachhochschulreife &#183; Abitur</span></button></li>
     </ul>
   </div>
-  <!-- Screen: Ferienmodus (wird ab 16. Juli 2026 automatisch anstelle von wbk-0 aktiviert, siehe Script unten) -->
+  <!-- Screen: Ferienmodus (wird 16. Juli - 31. August 2026 automatisch anstelle von wbk-0 aktiviert, siehe Script unten) -->
   <div id="wbk-holiday" class="wbk-screen">
     <div class="holiday-card hc-pause">
       <div class="card-title"><span class="hc-icon">&#127796;</span>Wir sind aktuell in den Sommerferien</div>
       <p style="font-size: 14px; color: #444; line-height: 1.6;">Die Anmeldephase f&#252;r das laufende Schuljahr ist am <strong>15. Juli 2026</strong> zu Ende gegangen. Die pers&#246;nliche Aufnahmeberatung macht bis zum Ende der Sommerferien (NRW: 20. Juli &#8211; 1. September 2026) Pause.</p>
     </div>
-    <div class="holiday-card hc-nachreichen">
+    <div id="wbk-holiday-nachreichen" class="holiday-card hc-nachreichen">
       <div class="card-title"><span class="hc-icon">&#128357;</span>Sondersprechstunde: Nur Unterlagen nachreichen</div>
       <div class="row" style="border-top: none; padding-top: 0 !important;"><span class="key">Zeit</span><span class="val">Mittwoch, 26. August 2026, 16.00 &#8211; 19.00 Uhr</span></div>
       <div class="row"><span class="key">Berater*in</span><span class="val">Sebastian Aufdemkamp</span></div>
@@ -105,8 +110,14 @@
       <div class="row"><span class="key">Wichtig</span><span class="val">An diesem Termin ist <strong>keine Neuanmeldung mehr m&#246;glich</strong> &#8211; er dient ausschlie&#223;lich dazu, noch fehlende Unterlagen f&#252;r bereits angemeldete Bewerbungen nachzureichen.</span></div>
     </div>
     <div class="holiday-card hc-next">
-      <div class="card-title"><span class="hc-icon">&#128197;</span>Neue Beratungstermine folgen</div>
-      <p style="font-size: 14px; color: #085041; line-height: 1.6;">Zum Ende der Sommerferien ver&#246;ffentlichen wir hier die neuen Beratungstermine. Zu diesen kannst du dich dann f&#252;r das im <strong>Februar 2027</strong> beginnende <strong>Sommersemester 2027</strong> anmelden.</p>
+      <div class="card-title"><span class="hc-icon">&#128197;</span>Neue Beratungstermine ab September</div>
+      <p id="wbk-newtimes-soon" style="font-size: 14px; color: #085041; line-height: 1.6;">Zum Ende der Sommerferien ver&#246;ffentlichen wir hier die neuen Beratungstermine. Zu diesen kannst du dich dann f&#252;r das im <strong>Februar 2027</strong> beginnende <strong>Sommersemester 2027</strong> anmelden.</p>
+    <div id="wbk-newtimes" style="display: none;">
+      <p style="font-size: 14px; color: #085041; line-height: 1.6; margin: 0 0 12px !important;">Ab <strong>Montag, 7. September 2026</strong> gelten neue Sprechzeiten (in der ersten Schulwoche findet noch keine Beratung statt). Zu diesen Sprechstunden kannst du dich f&#252;r das im <strong>Februar 2027</strong> beginnende <strong>Sommersemester 2027</strong> anmelden:</p>
+      <div class="row" style="border-top: none; padding-top: 0 !important;"><span class="key">M&#252;nster</span><span class="val">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br>Donnerstag, 13.00 &#8211; 14.30 Uhr <span class="muted">(Nicole Schneider)</span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span><br>Mittwoch, 12.00 &#8211; 13.30 Uhr <span class="muted">(Cylia B&#252;sching &#8211; Sprechstunde f&#252;r Gefl&#252;chtete)</span></span></div>
+      <div class="row"><span class="key">Rheine</span><span class="val">Donnerstag, 19.00 &#8211; 21.00 Uhr <span class="muted">(Boris R&#252;ping, Termin erforderlich)</span></span></div>
+      <p style="font-size: 13px; color: #0F6E56; line-height: 1.6; margin: 12px 0 0 !important;">Bewerber*innen mit Begleitperson kommen bitte zu einer der M&#252;nster-Sprechstunden (Philipp Terwey, Nicole Schneider oder Sebastian Aufdemkamp) und informieren Katja Klein vorab per E-Mail.</p>
+    </div>
     </div>
   </div>
   <!-- Screen: Begleitung -> Ort -->
@@ -128,9 +139,9 @@
       <div class="card-title">Sprechstunde f&#252;r Gefl&#252;chtete</div>
       <span class="badge-green">Kein Termin n&#246;tig &#183; No appointment needed &#183; &#1604;&#1575; &#1581;&#1575;&#1580;&#1577; &#1604;&#1605;&#1608;&#1593;&#1583;</span>
       <div class="row"><span class="key">Berater*in</span><span class="val">Cylia B&#252;sching</span></div>
-      <div class="row"><span class="key">Zeit</span><span class="val">Mittwoch, 12.00 &#8211; 14.00 Uhr</span></div>
+      <div class="row"><span class="key">Zeit</span><span class="val">Mittwoch, 12.00 &#8211; 13.30 Uhr</span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
-      <div class="row"><span class="key">Hinweis</span><span class="val">Einfach vorbeikommen &#8211; kein Termin erforderlich.<br><span class="muted">You can come by without an appointment on Wednesday between 12 and 2 pm.</span><br><span class="muted" dir="rtl">&#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1604;&#1602;&#1583;&#1608;&#1605; &#1583;&#1608;&#1606; &#1605;&#1608;&#1593;&#1583; &#1610;&#1608;&#1605; &#1575;&#1604;&#1571;&#1585;&#1576;&#1593;&#1575;&#1569; &#1576;&#1610;&#1606; &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; 12 &#1608;14.</span></span></div>
+      <div class="row"><span class="key">Hinweis</span><span class="val">Einfach vorbeikommen &#8211; kein Termin erforderlich.<br><span class="muted">You can come by without an appointment on Wednesday between 12 and 1:30 pm.</span><br><span class="muted" dir="rtl">&#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1604;&#1602;&#1583;&#1608;&#1605; &#1583;&#1608;&#1606; &#1605;&#1608;&#1593;&#1583; &#1610;&#1608;&#1605; &#1575;&#1604;&#1571;&#1585;&#1576;&#1593;&#1575;&#1569; &#1576;&#1610;&#1606; &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; 12 &#1608;1:30.</span></span></div>
     </div>
     <button class="restart">&#8634; Neu starten</button>
   </div>
@@ -144,23 +155,31 @@
       <li><button class="opt" data-go="wbk-alg-rh"><span class="opt-icon">&#128205;</span><span class="opt-label">Rheine (Au&#223;enstelle)</span><span class="opt-sub"><span style="display:inline-block;background:#FEF3C7;color:#b45309;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;">Nur Fachhochschulreife & Abitur</span></span></button></li>
     </ul>
   </div>
-  <!-- Endscreen: Begleitung M&#252;nster -->
+  <!-- Endscreen: Begleitung M&#252;nster (Regelung ab September 2026) -->
   <div id="wbk-beg-ms" class="wbk-screen">
     <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
     <button class="back">&#8592; zur&#252;ck</button>
     <div class="card">
       <div class="card-label">Deine Beratung</div>
-      <div class="card-title">Sprechstunde mit Begleitung &#8211; M&#252;nster</div>
-      <span class="badge-blue">Termin erforderlich</span>
-      <!-- Ausfall wegen Schulfest (datumsgesteuert, siehe Script unten) -->
-      <div id="wbk-kb-ausfall" class="notice-warn">
-        <span class="nw-icon">&#9888;&#65039;</span>
-        <span class="nw-text">Wegen des Schulfests am Nachmittag des <strong>15. Juli 2026</strong> entf&#228;llt an diesem Tag die Sprechstunde von <strong>Katja Klein &amp; Barbara Block</strong>.</span>
+      <div class="card-title">Beratung mit Begleitperson &#8211; M&#252;nster</div>
+      <span class="badge-blue">Bitte vorab per E-Mail anmelden</span>
+      <p style="font-size: 14px; color: #444; line-height: 1.6; margin: 0 0 18px !important;">F&#252;r Bewerber*innen, die gemeinsam mit einer Begleitperson kommen (z.B. Betreuer*in oder p&#228;dagogische Begleitung), sind <strong>Katja Klein &amp; Barbara Block</strong> zust&#228;ndig. So l&#228;uft es im kommenden Semester &#8211; in zwei Schritten:</p>
+      <div class="step">
+        <span class="step-num">1</span>
+        <div>
+          <p class="step-head">Kommt gemeinsam zu einer der regul&#228;ren Aufnahmesprechstunden in M&#252;nster:</p>
+          <p class="step-body">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br>Donnerstag, 13.00 &#8211; 14.30 Uhr <span class="muted">(Nicole Schneider)</span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></p>
+        </div>
       </div>
-      <div class="row"><span class="key">Berater*in</span><span class="val">Katja Klein & Barbara Block</span></div>
-      <div class="row"><span class="key">Zeiten</span><span class="val">Dienstag, 14.00 &#8211; 16.00 Uhr<br><span id="wbk-kb-line">Mittwoch, 13.30 &#8211; 15.00 Uhr</span></span></div>
-      <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
-      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://outlook.office365.com/owa/calendar/AufnahmeberatungamWeiterbildungskollegMnster@wbkmuenster.onmicrosoft.com/bookings/">&#128197; Online-Termin buchen</a></div>
+      <div class="step" style="margin-bottom: 0 !important;">
+        <span class="step-num">2</span>
+        <div>
+          <p class="step-head">Sagt Katja Klein vorher per E-Mail Bescheid, dass ihr kommt.</p>
+          <p class="step-body" style="margin: 0 0 10px !important;">So wei&#223; das Beratungsteam vorab, dass ihr zu einer der oben genannten Sprechstunden kommt.</p>
+          <a id="wbk-kk-mail" style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="mailto:kleinka@wbk.ms.de">&#9993; E-Mail an Katja Klein schreiben</a>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 18px;"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
     </div>
     <button class="restart">&#8634; Neu starten</button>
   </div>
@@ -170,12 +189,12 @@
     <button class="back">&#8592; zur&#252;ck</button>
     <div class="card">
       <div class="card-label">Deine Beratung</div>
-      <div class="card-title">Sprechstunde mit Begleitung &#8211; Rheine</div>
+      <div class="card-title">Beratung mit Begleitperson &#8211; Rheine</div>
       <span class="badge-blue">Termin erforderlich</span>
       <div class="row"><span class="key">Berater*in</span><span class="val">Boris R&#252;ping</span></div>
-      <div class="row"><span class="key">Zeiten</span><span class="val">Montag, 16.15 &#8211; 17.15 Uhr<br>Montag, 19.45 &#8211; 20.45 Uhr</span></div>
+      <div class="row"><span class="key">Zeit</span><span class="val">Donnerstag, 19.00 &#8211; 21.00 Uhr</span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Sekretariat des Abendgymnasiums<br>Kopernikusstra&#223;e 61, Rheine</span></div>
-      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://outlook.office365.com/owa/calendar/AufnahmeberatungamWeiterbildungskollegMnster@wbkmuenster.onmicrosoft.com/bookings/">&#128197; Online-Termin buchen</a></div>
+      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://www.abendgymnasium-rheine.de/kontakt.php?termin=1#kontaktformular">&#128197; Online-Termin buchen</a></div>
     </div>
     <button class="restart">&#8634; Neu starten</button>
   </div>
@@ -186,29 +205,9 @@
     <div class="card">
       <div class="card-label">Deine Beratung</div>
       <div class="card-title">Allgemeine Aufnahmeberatung &#8211; M&#252;nster</div>
-      <!-- Ausfall-Hinweis (datumsgesteuert, siehe Script unten) -->
-      <div id="wbk-ns-ausfall" class="notice-warn">
-        <span class="nw-icon">&#9888;&#65039;</span>
-        <span class="nw-text">Am <strong>Montag, 6. Juli 2026</strong> entf&#228;llt die Sprechstunde von <strong>Nicole Schneider</strong> (Mo, 12.00 &#8211; 13.30 Uhr). Bitte weiche an diesem Tag auf die anderen aufgef&#252;hrten Sprechzeiten aus.</span>
-      </div>
-      <!-- Ausfall aus dienstlichen Gr&#252;nden (datumsgesteuert, siehe Script unten) -->
-      <div id="wbk-ns-ausfall2" class="notice-warn">
-        <span class="nw-icon">&#9888;&#65039;</span>
-        <span class="nw-text">Am <strong>Montag, 13. Juli 2026</strong> entf&#228;llt die Sprechstunde von <strong>Nicole Schneider</strong> (Mo, 12.00 &#8211; 13.30 Uhr) aus dienstlichen Gr&#252;nden. Bitte weiche an diesem Tag auf die anderen aufgef&#252;hrten Sprechzeiten aus.</span>
-      </div>
-      <!-- Zeit&#228;nderung (datumsgesteuert, siehe Script unten) -->
-      <div id="wbk-sa-zeit" class="notice-warn">
-        <span class="nw-icon">&#128357;</span>
-        <span class="nw-text">Am <strong>Mittwoch, 1. Juli 2026</strong> beginnt die Sprechstunde von <strong>Sebastian Aufdemkamp</strong> wegen einer Abiturpr&#252;fung ausnahmsweise erst um <strong>10.30 Uhr</strong> (statt 10.15 Uhr).</span>
-      </div>
-      <!-- Ausfall wegen Schulfest (datumsgesteuert, siehe Script unten) -->
-      <div id="wbk-pt-ausfall" class="notice-warn">
-        <span class="nw-icon">&#9888;&#65039;</span>
-        <span class="nw-text">Wegen des Schulfests am Nachmittag des <strong>15. Juli 2026</strong> entf&#228;llt an diesem Tag die Sprechstunde von <strong>Philipp Terwey</strong>.</span>
-      </div>
       <div style="background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 8px; padding: 12px 16px; margin: 0 0 16px !important; display: flex; align-items: center; gap: 12px;"><span style="font-size: 22px; flex-shrink: 0;">&#9989;</span><span style="font-size: 14px; font-weight: 500; color: #085041; line-height: 1.4;">Kein Termin erforderlich &#8211; einfach zu den Sprechzeiten vorbeikommen.</span></div>
       <div class="row"><span class="key">Berater*in</span><span class="val">Nicole Schneider, Sebastian Aufdemkamp oder Philipp Terwey</span></div>
-      <div class="row"><span class="key">Zeiten</span><span class="val"><span id="wbk-ns-line">Mo, 12.00 &#8211; 13.30 Uhr <span class="muted">(Nicole Schneider)</span></span><br><span id="wbk-sa-line">Mi, <span id="wbk-sa-time">10.15 &#8211; 11.45</span> Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span><br><span id="wbk-pt-line">Mi, 17.30 &#8211; 19.00 Uhr <span class="muted">(Philipp Terwey)</span></span></span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val">Di, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br>Do, 13.00 &#8211; 14.30 Uhr <span class="muted">(Nicole Schneider)</span><br>Fr, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
     </div>
     <div class="redir">
@@ -228,9 +227,9 @@
       <p style="font-size: 13px; color: #b45309; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px; padding: 10px 14px; margin: 0 0 14px !important;">In Rheine werden ausschlie&#223;lich die Bildungsg&#228;nge <strong>Fachhochschulreife</strong> und <strong>Abitur</strong> angeboten.</p>
       <span class="badge-blue">Termin erforderlich</span>
       <div class="row"><span class="key">Berater*in</span><span class="val">Boris R&#252;ping</span></div>
-      <div class="row"><span class="key">Zeiten</span><span class="val">Montag, 16.15 &#8211; 17.15 Uhr<br>Montag, 19.45 &#8211; 20.45 Uhr</span></div>
+      <div class="row"><span class="key">Zeit</span><span class="val">Donnerstag, 19.00 &#8211; 21.00 Uhr</span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Sekretariat des Abendgymnasiums<br>Kopernikusstra&#223;e 61, Rheine</span></div>
-      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://outlook.office365.com/owa/calendar/AufnahmeberatungamWeiterbildungskollegMnster@wbkmuenster.onmicrosoft.com/bookings/">&#128197; Online-Termin buchen</a></div>
+      <div class="row" style="border-top: none; padding-top: 12px !important;"><a style="display: inline-flex; align-items: center; gap: 8px; background: #185FA5; color: #fff !important; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none;" href="https://www.abendgymnasium-rheine.de/kontakt.php?termin=1#kontaktformular">&#128197; Online-Termin buchen</a></div>
     </div>
     <button class="restart">&#8634; Neu starten</button>
   </div>
@@ -261,62 +260,69 @@
     if (btn) { e.preventDefault(); var target = btn.getAttribute('data-go'); if (target) go(target); }
   });
 
-  /* --- Datumsgesteuerte Ausfall-Hinweise ---
-     Jeder Eintrag wird nur im Zeitfenster [showFrom .. hideAfter) angezeigt.
-     Monate sind 0-basiert: 0 = Januar, 6 = Juli.
-     Zum Hinzuf&#252;gen weiterer Ausf&#228;lle einfach einen neuen Eintrag erg&#228;nzen. */
-  var ausfaelle = [
-    {
-      noticeId: 'wbk-ns-ausfall',                 // Hinweis-Box, die eingeblendet wird
-      lineId:   'wbk-ns-line',                    // Zeile, die durchgestrichen wird (optional, '' = keine)
-      showFrom:  new Date(2026, 5, 29, 13, 30),   // direkt nach der letzten regul&#228;ren Sprechstunde (Mo, 29. Juni 2026, 13.30 Uhr)
-      hideAfter: new Date(2026, 6, 7)             // ab Dienstag, 7. Juli 2026, 00:00 wieder ausgeblendet
-    },
-    {
-      noticeId: 'wbk-ns-ausfall2',                // Nicole Schneider entf&#228;llt am 13. Juli aus dienstlichen Gr&#252;nden
-      lineId:   'wbk-ns-line',
-      showFrom:  new Date(2026, 6, 7),            // ab Dienstag, 7. Juli 2026, 00:00 (nahtlos nach dem 6.-Juli-Hinweis)
-      hideAfter: new Date(2026, 6, 14)            // ab Dienstag, 14. Juli 2026, 00:00 wieder ausgeblendet
-    },
-    {
-      noticeId: 'wbk-pt-ausfall',                 // Schulfest am Nachmittag des 15. Juli: Sprechstunde Philipp Terwey entf&#228;llt
-      lineId:   'wbk-pt-line',
-      showFrom:  new Date(2026, 6, 8, 19, 0),     // direkt nach der letzten regul&#228;ren Sprechstunde (Mi, 8. Juli 2026, 19.00 Uhr)
-      hideAfter: new Date(2026, 6, 16)            // ab Donnerstag, 16. Juli 2026, 00:00 wieder ausgeblendet (Ferienmodus &#252;bernimmt ohnehin)
-    },
-    {
-      noticeId: 'wbk-kb-ausfall',                 // Schulfest am Nachmittag des 15. Juli: Sprechstunde Katja Klein & Barbara Block entf&#228;llt
-      lineId:   'wbk-kb-line',
-      showFrom:  new Date(2026, 6, 8, 15, 0),     // direkt nach der letzten regul&#228;ren Sprechstunde (Mi, 8. Juli 2026, 15.00 Uhr)
-      hideAfter: new Date(2026, 6, 16)            // ab Donnerstag, 16. Juli 2026, 00:00 wieder ausgeblendet (Ferienmodus &#252;bernimmt ohnehin)
-    }
-  ];
   var now = new Date();
 
-  /* --- Ferienmodus ---
-     Ab diesem Zeitpunkt (16. Juli 2026, 00:00 - direkt nach Ende der Anmeldephase am 15. Juli)
-     zeigt das Widget keine Terminbuchung mehr, sondern nur noch die Ferien-Hinweise. */
-  var holidayModeFrom = new Date(2026, 6, 16);
-  if (now >= holidayModeFrom) {
+  /* --- E-Mail-Link an Katja Klein (Beratung mit Begleitperson) ---
+     Betreff und Text werden hier zusammengebaut und automatisch korrekt kodiert,
+     damit Umlaute/Sonderzeichen im Mailprogramm sauber ankommen. */
+  var kkMail = document.getElementById('wbk-kk-mail');
+  if (kkMail) {
+    var kkSubject = 'Anmeldung mit Begleitperson \u2013 Ank\u00fcndigung';
+    var kkBody = 'Guten Tag Frau Klein,\n\nich m\u00f6chte mich gemeinsam mit meiner Begleitperson zur Aufnahmeberatung anmelden und komme zu folgender Sprechstunde:\n\nName (Bewerber*in): \nName der Begleitperson: \nGew\u00fcnschte Sprechstunde (Berater*in / Wochentag): \n\nMit freundlichen Gr\u00fc\u00dfen';
+    kkMail.href = 'mailto:kleinka@wbk.ms.de?subject=' + encodeURIComponent(kkSubject) + '&body=' + encodeURIComponent(kkBody);
+  }
+
+  /* --- Ferienmodus (16. Juli 2026 bis 31. August 2026) ---
+     In diesem Zeitraum zeigt das Widget statt des Frage-Assistenten die Ferien-Hinweise.
+     Ab 1. September 2026 greift wieder automatisch das normale Frage-Widget mit den
+     neuen Sprechzeiten. Monate sind 0-basiert: 0 = Januar, 6 = Juli, 7 = August, 8 = September. */
+  var holidayFrom  = new Date(2026, 6, 16);  // 16. Juli 2026, 00:00
+  var holidayUntil = new Date(2026, 8, 1);   // 1. September 2026, 00:00 (danach normales Widget)
+  if (now >= holidayFrom && now < holidayUntil) {
     hist = ['wbk-holiday'];
     show('wbk-holiday');
     var heading = document.getElementById('wbk-heading');
     var intro = document.getElementById('wbk-intro');
     if (heading) heading.textContent = 'Aufnahmeberatung in den Sommerferien';
-    if (intro) intro.textContent = 'Die Anmeldephase ist beendet \u2013 hier findest du alle Infos zur Sondersprechstunde und zu den n\u00e4chsten Beratungsterminen.';
+    if (intro) intro.textContent = 'Die Anmeldephase ist beendet \u2013 hier findest du alle Infos zur Sondersprechstunde und zu den neuen Beratungsterminen ab September.';
+
+    /* Ab 1. August 2026 zus&#228;tzlich die konkreten neuen Sprechzeiten einblenden
+       (vorher steht dort nur der "folgen"-Hinweis). */
+    var newtimesFrom = new Date(2026, 7, 1); // 1. August 2026, 00:00
+    if (now >= newtimesFrom) {
+      var soon = document.getElementById('wbk-newtimes-soon');
+      var nt = document.getElementById('wbk-newtimes');
+      if (soon) soon.style.display = 'none';
+      if (nt) nt.style.display = 'block';
+    }
+
+    /* Sondersprechstunde zum Nachreichen nur bis einschl. 26. August 2026 anzeigen. */
+    var nachreichenHideAfter = new Date(2026, 7, 27); // ab 27. August 2026, 00:00 ausblenden
+    if (now >= nachreichenHideAfter) {
+      var nach = document.getElementById('wbk-holiday-nachreichen');
+      if (nach) nach.style.display = 'none';
+    }
   }
 
-  /* --- Anmeldeschluss-Hinweis ---
-     Erinnert bis zum Ende der Anmeldephase daran, dass der 15. Juli 2026 der
-     letzte Anmeldetag ist. Verschwindet automatisch, sobald der Ferienmodus greift.
-     Monate sind 0-basiert: 0 = Januar, 6 = Juli. */
-  var deadlineFrom  = new Date(2026, 6, 1);   // ab Mittwoch, 1. Juli 2026, 00:00
-  var deadlineUntil = new Date(2026, 6, 16);  // bis einschl. 15. Juli; ab 16. Juli 00:00 aus (Ferienmodus &#252;bernimmt)
-  if (now >= deadlineFrom && now < deadlineUntil) {
-    var db = document.getElementById('wbk-deadline');
-    if (db) db.style.display = 'flex';
+  /* --- Start-Hinweis zum Schuljahresbeginn ---
+     Vom 1. bis einschl. 7. September 2026 weist ein Banner darauf hin, dass die
+     erste Beratung erst ab Montag, 7. September stattfindet (erste Schulwoche ohne Beratung). */
+  var startFrom  = new Date(2026, 8, 1);  // 1. September 2026, 00:00
+  var startUntil = new Date(2026, 8, 8);  // 8. September 2026, 00:00 (also bis einschl. 7.9.)
+  if (now >= startFrom && now < startUntil) {
+    var sb = document.getElementById('wbk-startinfo');
+    if (sb) sb.style.display = 'flex';
   }
 
+  /* --- Datumsgesteuerte Ausfall-Hinweise (Ger&#252;st f&#252;r k&#252;nftige Ausf&#228;lle) ---
+     Zum Einblenden eines Ausfalls: eine Hinweis-Box (.notice-warn) mit eigener id in das
+     jeweilige Endscreen einf&#252;gen und hier einen Eintrag erg&#228;nzen. Jeder Eintrag wird nur
+     im Zeitfenster [showFrom .. hideAfter) angezeigt; lineId (optional) wird durchgestrichen.
+     Monate sind 0-basiert: 0 = Januar, 8 = September.
+     Beispiel:
+     { noticeId: 'wbk-xy-ausfall', lineId: 'wbk-xy-line',
+       showFrom: new Date(2026, 8, 7), hideAfter: new Date(2026, 8, 8) } */
+  var ausfaelle = [];
   for (var i = 0; i < ausfaelle.length; i++) {
     var a = ausfaelle[i];
     if (now >= a.showFrom && now < a.hideAfter) {
@@ -325,31 +331,6 @@
       if (a.lineId) {
         var line = document.getElementById(a.lineId);
         if (line) line.classList.add('line-cancelled');
-      }
-    }
-  }
-
-  /* --- Datumsgesteuerte Zeit&#228;nderungen ---
-     Wie oben, blendet aber einen Hinweis ein und ersetzt die angezeigte Uhrzeit
-     (timeId) im Zeitfenster [showFrom .. hideAfter) durch newTime.
-     Monate sind 0-basiert: 0 = Januar, 6 = Juli. */
-  var aenderungen = [
-    {
-      noticeId: 'wbk-sa-zeit',                    // Hinweis-Box, die eingeblendet wird
-      timeId:   'wbk-sa-time',                    // Uhrzeit-Span, der ersetzt wird (optional, '' = keiner)
-      newTime:  '10.30 \u2013 11.45',            // Ersatz-Uhrzeit (\u2013 = Gedankenstrich, ASCII-sicher)
-      showFrom:  new Date(2026, 5, 24, 11, 45),   // direkt nach der vorigen Sprechstunde (Mi, 24. Juni 2026, 11.45 Uhr)
-      hideAfter: new Date(2026, 6, 2)             // ab Donnerstag, 2. Juli 2026, 00:00 wieder normal
-    }
-  ];
-  for (var k = 0; k < aenderungen.length; k++) {
-    var c = aenderungen[k];
-    if (now >= c.showFrom && now < c.hideAfter) {
-      var cbox = document.getElementById(c.noticeId);
-      if (cbox) cbox.style.display = 'flex';
-      if (c.timeId && c.newTime) {
-        var t = document.getElementById(c.timeId);
-        if (t) t.textContent = c.newTime;
       }
     }
   }
