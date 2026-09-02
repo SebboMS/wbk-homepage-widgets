@@ -50,3 +50,24 @@ Homepage lädt bei jedem Seitenaufruf automatisch den aktuellen Stand.
 1. Widget-HTML hier im Repo anpassen.
 2. Commit + Push auf `main`.
 3. Fertig – kein Eingriff in WordPress nötig.
+
+## E-Mail-Vorlage an Katja Klein (Beratung mit Begleitperson)
+
+Die beiden Links „E-Mail an Katja Klein schreiben" (Ferienkarte + Begleitperson-Schritt)
+bekommen ihren `mailto:`-Link **per Script** (`var kkBody` im Script-Block, gesucht über
+die Klasse `.wbk-kk-mail`) — nicht im HTML-Attribut. Grund: Betreff und Fließtext werden
+so mit `encodeURIComponent` kodiert, damit Umlaute und Zeilenumbrüche im Mailprogramm
+sauber ankommen. Das `href` im Markup ist nur der Fallback ohne Vorlage.
+
+Abgefragte Felder (Stand 02.09.2026):
+
+1. Name (Bewerber\*in)
+2. Name der Begleitperson
+3. Letzter Schulabschluss — mit Beispielen, weil Bewerber\*innen die aktuellen
+   Bezeichnungen oft nicht kennen
+4. Angestrebter Schulabschluss am WBK — Wunschziel, damit die Beratung vorbereitet ist
+5. Gewünschte Sprechstunde (Berater\*in / Wochentag)
+
+Beim Ändern: Text in `kkBody` anpassen, `\n` für Zeilenumbrüche, Umlaute als
+`\uXXXX`-Escapes schreiben (Rest der Datei macht es genauso). Vorlage nicht zu lang
+werden lassen — manche Mailprogramme kürzen sehr lange `mailto:`-Links.

@@ -268,7 +268,7 @@
   var kkMails = document.querySelectorAll('.wbk-kk-mail');
   if (kkMails.length) {
     var kkSubject = 'Anmeldung mit Begleitperson \u2013 Ank\u00fcndigung';
-    var kkBody = 'Guten Tag Frau Klein,\n\nich m\u00f6chte mich gemeinsam mit meiner Begleitperson zur Aufnahmeberatung anmelden und komme zu folgender Sprechstunde:\n\nName (Bewerber*in): \nName der Begleitperson: \nGew\u00fcnschte Sprechstunde (Berater*in / Wochentag): \n\nMit freundlichen Gr\u00fc\u00dfen';
+    var kkBody = 'Guten Tag Frau Klein,\n\nich m\u00f6chte mich gemeinsam mit meiner Begleitperson zur Aufnahmeberatung anmelden und komme zu folgender Sprechstunde:\n\nName (Bewerber*in): \nName der Begleitperson: \nLetzter Schulabschluss (z.B. kein Abschluss, Erster Schulabschluss, Mittlerer Schulabschluss): \nAngestrebter Schulabschluss am WBK (z.B. Mittlerer Schulabschluss, Fachhochschulreife, Abitur): \nGew\u00fcnschte Sprechstunde (Berater*in / Wochentag): \n\nMit freundlichen Gr\u00fc\u00dfen';
     var kkHref = 'mailto:kleinka@wbk.ms.de?subject=' + encodeURIComponent(kkSubject) + '&body=' + encodeURIComponent(kkBody);
     for (var m = 0; m < kkMails.length; m++) kkMails[m].href = kkHref;
   }
