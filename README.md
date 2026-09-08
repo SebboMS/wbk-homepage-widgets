@@ -51,6 +51,22 @@ Homepage lädt bei jedem Seitenaufruf automatisch den aktuellen Stand.
 2. Commit + Push auf `main`.
 3. Fertig – kein Eingriff in WordPress nötig.
 
+## Info-Banner oben (Gerüst)
+
+Für Hinweise, die über dem gesamten Widget stehen (z. B. „Beratung startet erst ab …"), gibt es
+das CSS-Gerüst `.deadline-banner`. Es ist bewusst ohne Beispiel im Markup, damit keine
+abgelaufenen Termine in der Datei liegen bleiben. Zum Einsetzen direkt nach dem `<p id="wbk-intro">`:
+
+```html
+<div id="wbk-startinfo" class="deadline-banner">
+  <span class="db-icon">&#128197;</span>
+  <span class="db-text">Text mit <strong>hervorgehobenem Termin</strong>.</span>
+</div>
+```
+
+Dazu im Script ein Zeitfenster ergänzen (`if (now >= von && now < bis) { …style.display = 'flex'; }`)
+und beides nach Ablauf wieder entfernen.
+
 ## Datumsgesteuerte Ausfall- und Änderungs-Hinweise
 
 Kurzfristige Abweichungen bei den Sprechzeiten (Ausfall, Vertretung, verkürzte Sprechstunde)

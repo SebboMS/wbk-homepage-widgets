@@ -54,7 +54,7 @@
 .wbk .notice-warn .nw-text strong { color: #78350f; }
 .wbk .line-cancelled { text-decoration: line-through; color: #999 !important; }
 .wbk .line-changed { background: #FEF3C7; border-radius: 4px; padding: 1px 5px; color: #92400e !important; }
-/* --- Info-Banner oben (datumsgesteuert) --- */
+/* --- Info-Banner oben (datumsgesteuert, Ger&#252;st - Beispiel-Markup siehe README) --- */
 .wbk .deadline-banner {
   display: none; align-items: center; gap: 12px;
   background: #E6F1FB; border: 1px solid #A9CDEB; border-radius: 12px;
@@ -82,11 +82,6 @@
 <div id="wbk" class="wbk">
   <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
   <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
-  <!-- Start-Hinweis zum Schuljahresbeginn (datumsgesteuert 1.-7. September 2026, siehe Script unten) -->
-  <div id="wbk-startinfo" class="deadline-banner">
-    <span class="db-icon">&#128197;</span>
-    <span class="db-text">Die Aufnahmeberatung startet ins neue Schuljahr: Die <strong>ersten Sprechstunden finden ab Montag, 7. September 2026</strong> statt &#8211; in der ersten Schulwoche findet noch keine Beratung statt.</span>
-  </div>
   <!-- Screen 1: Wer? -->
   <div id="wbk-0" class="wbk-screen wbk-active">
     <div class="prog"><div class="dot on"> </div><div class="dot"> </div><div class="dot"> </div></div>
@@ -314,16 +309,6 @@
       var nach = document.getElementById('wbk-holiday-nachreichen');
       if (nach) nach.style.display = 'none';
     }
-  }
-
-  /* --- Start-Hinweis zum Schuljahresbeginn ---
-     Vom 1. bis einschl. 7. September 2026 weist ein Banner darauf hin, dass die
-     erste Beratung erst ab Montag, 7. September stattfindet (erste Schulwoche ohne Beratung). */
-  var startFrom  = new Date(2026, 8, 1);  // 1. September 2026, 00:00
-  var startUntil = new Date(2026, 8, 8);  // 8. September 2026, 00:00 (also bis einschl. 7.9.)
-  if (now >= startFrom && now < startUntil) {
-    var sb = document.getElementById('wbk-startinfo');
-    if (sb) sb.style.display = 'flex';
   }
 
   /* --- Datumsgesteuerte Ausfall- und Aenderungs-Hinweise ---
