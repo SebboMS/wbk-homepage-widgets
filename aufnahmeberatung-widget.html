@@ -174,7 +174,7 @@
         <span class="step-num">1</span>
         <div>
           <p class="step-head">Kommt gemeinsam zu einer der regul&#228;ren Aufnahmesprechstunden in M&#252;nster:</p>
-          <p class="step-body">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br><span id="wbk-beg-ms-ns-line">Donnerstag, 13.00 &#8211; 14.30 Uhr <span class="muted">(Nicole Schneider)</span></span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></p>
+          <p class="step-body">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br><span id="wbk-beg-ms-ns-line">Donnerstag, 13.00 &#8211; <span id="wbk-beg-ms-ns-end">14.30</span> Uhr <span class="muted">(Nicole Schneider)</span></span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></p>
         </div>
       </div>
       <div class="step" style="margin-bottom: 0 !important;">
@@ -218,7 +218,7 @@
       <div class="card-title">Allgemeine Aufnahmeberatung &#8211; M&#252;nster</div>
       <div style="background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 8px; padding: 12px 16px; margin: 0 0 16px !important; display: flex; align-items: center; gap: 12px;"><span style="font-size: 22px; flex-shrink: 0;">&#9989;</span><span style="font-size: 14px; font-weight: 500; color: #085041; line-height: 1.4;">Kein Termin erforderlich &#8211; einfach zu den Sprechzeiten vorbeikommen.</span></div>
       <div class="row"><span class="key">Berater*in</span><span class="val">Nicole Schneider, Sebastian Aufdemkamp oder Philipp Terwey</span></div>
-      <div class="row"><span class="key">Zeiten</span><span class="val">Di, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br><span id="wbk-alg-ms-ns-line">Do, 13.00 &#8211; 14.30 Uhr <span class="muted">(Nicole Schneider)</span></span><br>Fr, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val">Di, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br><span id="wbk-alg-ms-ns-line">Do, 13.00 &#8211; <span id="wbk-alg-ms-ns-end">14.30</span> Uhr <span class="muted">(Nicole Schneider)</span></span><br>Fr, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
     </div>
     <div class="redir">
@@ -332,6 +332,8 @@
      Zeitfenster [showFrom .. hideAfter) angezeigt.
        noticeIds - ids der Hinweis-Boxen, die eingeblendet werden
        lineIds   - (optional) ids der betroffenen Sprechzeit-Zeilen, die markiert werden
+       textSwaps - (optional) [{ id, text }]: ersetzt im Zeitfenster den Text des Elements,
+                   z.B. die Endzeit einer verkuerzten Sprechstunde
        lineClass - 'line-cancelled' (durchgestrichen, Sprechstunde f&#228;llt aus)
                    oder 'line-changed' (gelb hinterlegt, Sprechstunde findet ge&#228;ndert statt)
      Monate sind 0-basiert: 0 = Januar, 8 = September.
@@ -343,6 +345,8 @@
     { noticeIds: ['wbk-alg-ms-ns-1709', 'wbk-beg-ms-ns-1709'],
       lineIds:   ['wbk-alg-ms-ns-line', 'wbk-beg-ms-ns-line'],
       lineClass: 'line-changed',
+      textSwaps: [{ id: 'wbk-alg-ms-ns-end', text: '14.00' },
+                  { id: 'wbk-beg-ms-ns-end', text: '14.00' }],
       showFrom:  new Date(2026, 8, 10, 14, 30),  // Do, 10. September 2026, nach der Sprechstunde
       hideAfter: new Date(2026, 8, 18) }         // bis einschl. 17. September 2026
   ];
@@ -358,6 +362,11 @@
       for (var l = 0; l < lids.length; l++) {
         var line = document.getElementById(lids[l]);
         if (line) line.classList.add(a.lineClass || 'line-cancelled');
+      }
+      var swaps = a.textSwaps || [];
+      for (var t = 0; t < swaps.length; t++) {
+        var sw = document.getElementById(swaps[t].id);
+        if (sw) sw.textContent = swaps[t].text;
       }
     }
   }

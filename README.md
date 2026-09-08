@@ -69,6 +69,10 @@ So wird ein Hinweis ergänzt:
    - `lineIds` – (optional) ids der markierten Zeilen
    - `lineClass` – `line-cancelled` (durchgestrichen, fällt aus) oder `line-changed`
      (gelb hinterlegt, findet geändert statt)
+   - `textSwaps` – (optional) `[{ id, text }]`: ersetzt im Zeitfenster den Text einzelner
+     Elemente. Damit steht in der Sprechzeit-Zeile direkt die geänderte Uhrzeit. Dafür ist die
+     Endzeit in ein eigenes `<span>` gefasst (`wbk-alg-ms-ns-end`, `wbk-beg-ms-ns-end`) —
+     bei anderen Zeilen ebenso vorgehen.
    - `showFrom` / `hideAfter` – Zeitfenster `[showFrom .. hideAfter)`; **Monate sind 0-basiert**
      (`new Date(2026, 8, 18)` = 18. September 2026)
 
@@ -81,7 +85,10 @@ Seite schaut, plant ohnehin für den früheren Termin, und der Hinweis stünde n
 **Aktueller Eintrag (Stand 08.09.2026):** Nicole Schneiders Sprechstunde endet am
 Donnerstag, **17. September 2026** bereits um 14.00 Uhr (Konferenz um 14.00 Uhr). Der Hinweis
 erscheint ab Donnerstag, 10. September, 14.30 Uhr (Ende ihrer Sprechstunde in der Woche davor)
-und läuft bis einschließlich 17. September; danach kann er entfernt werden.
+und läuft bis einschließlich 17. September; danach kann er entfernt werden. In dieser Zeit steht
+in der Sprechzeit-Zeile „Do, 13.00 – 14.00 Uhr", weil im Fenster nur dieser eine Donnerstag liegt.
+Wichtig beim Nachbauen: `showFrom` so legen, dass kein regulärer Termin derselben Berater\*in mehr
+ins Fenster fällt — sonst zeigt die Zeile für diesen Termin die falsche Zeit.
 
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
 simulieren, ohne die Systemuhr zu stellen.
