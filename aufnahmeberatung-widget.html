@@ -338,12 +338,13 @@
      Abgelaufene Eintr&#228;ge k&#246;nnen samt ihrer Hinweis-Boxen wieder gel&#246;scht werden. */
   var ausfaelle = [
     /* 17.09.2026: Nicole Schneider muss um 14.00 Uhr zur Konferenz, Sprechstunde endet
-       deshalb 30 Minuten frueher. Hinweis laeuft ab 08.09. mit gut einer Woche Vorlauf. */
+       deshalb 30 Minuten frueher. Der Hinweis erscheint erst nach ihrer Sprechstunde in
+       der Woche davor - vorher betrifft er niemanden, der gerade plant vorbeizukommen. */
     { noticeIds: ['wbk-alg-ms-ns-1709', 'wbk-beg-ms-ns-1709'],
       lineIds:   ['wbk-alg-ms-ns-line', 'wbk-beg-ms-ns-line'],
       lineClass: 'line-changed',
-      showFrom:  new Date(2026, 8, 8),    // ab 8. September 2026
-      hideAfter: new Date(2026, 8, 18) }  // bis einschl. 17. September 2026
+      showFrom:  new Date(2026, 8, 10, 14, 30),  // Do, 10. September 2026, nach der Sprechstunde
+      hideAfter: new Date(2026, 8, 18) }         // bis einschl. 17. September 2026
   ];
   for (var i = 0; i < ausfaelle.length; i++) {
     var a = ausfaelle[i];

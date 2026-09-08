@@ -74,9 +74,14 @@ So wird ein Hinweis ergänzt:
 
 Abgelaufene Einträge samt ihrer Hinweis-Boxen wieder löschen, damit die Datei nicht zuwächst.
 
+`showFrom` darf auch eine Uhrzeit tragen (`new Date(2026, 8, 10, 14, 30)`). Sinnvoll ist als
+Startpunkt das Ende der **vorangehenden** Sprechstunde derselben Berater\*in: Wer vorher auf die
+Seite schaut, plant ohnehin für den früheren Termin, und der Hinweis stünde nur unnötig im Weg.
+
 **Aktueller Eintrag (Stand 08.09.2026):** Nicole Schneiders Sprechstunde endet am
 Donnerstag, **17. September 2026** bereits um 14.00 Uhr (Konferenz um 14.00 Uhr). Der Hinweis
-läuft vom 8. bis einschließlich 17. September und kann danach entfernt werden.
+erscheint ab Donnerstag, 10. September, 14.30 Uhr (Ende ihrer Sprechstunde in der Woche davor)
+und läuft bis einschließlich 17. September; danach kann er entfernt werden.
 
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
 simulieren, ohne die Systemuhr zu stellen.
