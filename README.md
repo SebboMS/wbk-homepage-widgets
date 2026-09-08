@@ -51,6 +51,39 @@ Homepage lädt bei jedem Seitenaufruf automatisch den aktuellen Stand.
 2. Commit + Push auf `main`.
 3. Fertig – kein Eingriff in WordPress nötig.
 
+## Ferienmodus: vor den Sommerferien anpassen
+
+Zwischen `holidayFrom` und `holidayUntil` zeigt das Widget statt des Frage-Assistenten den
+Screen `wbk-holiday` (Ferien-Hinweise). Der Screen bleibt das Jahr über stehen, seine Inhalte
+sind aber jahresspezifisch. **Stand der Angaben: Sommer 2026** — vor den nächsten Sommerferien
+diese Stellen durchgehen:
+
+**Im Markup (Screen `wbk-holiday`)**
+
+| Stelle | Was aktualisiert werden muss |
+| --- | --- |
+| Karte `hc-pause` | Ende der Anmeldephase (zuletzt 15. Juli 2026) und NRW-Ferienzeitraum (zuletzt 20. Juli – 1. September 2026) |
+| `wbk-holiday-nachreichen` | Sondersprechstunde zum Nachreichen: Termin, Beratungsperson, Raum. War 2026 ein einmaliger Mittwochstermin — gibt es sie nicht wieder, den ganzen Block löschen |
+| `wbk-newtimes-soon` | Semester, für das dann angemeldet wird (zuletzt: Sommersemester 2027, Start Februar 2027) |
+| `wbk-newtimes` | Startdatum der neuen Sprechzeiten, die Sprechzeiten selbst (Münster + Rheine) und wieder die Semesterangabe |
+
+**Im Script**
+
+| Variable | Bedeutung |
+| --- | --- |
+| `holidayFrom` / `holidayUntil` | Zeitfenster des Ferienmodus (zuletzt 16. Juli – 1. September 2026) |
+| `newtimesFrom` | Ab wann statt „Termine folgen" die konkreten neuen Sprechzeiten stehen (zuletzt 1. August 2026) |
+| `nachreichenHideAfter` | Ab wann die Sondersprechstunde ausgeblendet wird (zuletzt 27. August 2026) |
+| Überschrift + Intro | Werden im Ferienmodus per Script überschrieben (`wbk-heading`, `wbk-intro`) |
+
+**Monate sind 0-basiert** — `new Date(2027, 6, 15)` ist der 15. Juli 2027.
+
+Ändern sich dabei die Sprechzeiten, stehen sie an **drei** Stellen: in `wbk-newtimes`, im Endscreen
+`wbk-alg-ms` (Zeile „Zeiten") und im Endscreen `wbk-beg-ms` (Schritt 1). Alle drei anpassen.
+
+Zum Schuljahresstart ist außerdem meist ein Banner sinnvoll, dass in der ersten Schulwoche noch
+keine Beratung stattfindet — Vorlage dafür im Abschnitt oben.
+
 ## Info-Banner oben (Gerüst)
 
 Für Hinweise, die über dem gesamten Widget stehen (z. B. „Beratung startet erst ab …"), gibt es
