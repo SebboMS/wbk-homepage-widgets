@@ -51,6 +51,36 @@ Homepage lädt bei jedem Seitenaufruf automatisch den aktuellen Stand.
 2. Commit + Push auf `main`.
 3. Fertig – kein Eingriff in WordPress nötig.
 
+## Datumsgesteuerte Ausfall- und Änderungs-Hinweise
+
+Kurzfristige Abweichungen bei den Sprechzeiten (Ausfall, Vertretung, verkürzte Sprechstunde)
+werden **nicht** in die Sprechzeiten-Zeilen eingerechnet, sondern als eigene Hinweis-Box über
+der Beratungskarte eingeblendet — automatisch nur in einem festgelegten Zeitfenster. So kann
+der Hinweis mit Vorlauf eingebaut werden und verschwindet danach ohne weiteres Zutun.
+
+So wird ein Hinweis ergänzt:
+
+1. In **jedes** betroffene Endscreen (z. B. `wbk-alg-ms` *und* `wbk-beg-ms` — dort stehen die
+   Münsteraner Sprechzeiten doppelt) eine Box `<div id="…" class="notice-warn">` direkt vor
+   `<div class="card">` einsetzen.
+2. Die betroffene Sprechzeit-Zeile in ein `<span id="…">` klammern, damit sie markiert werden kann.
+3. Im Script unten einen Eintrag im Array `ausfaelle` ergänzen:
+   - `noticeIds` – ids der Hinweis-Boxen
+   - `lineIds` – (optional) ids der markierten Zeilen
+   - `lineClass` – `line-cancelled` (durchgestrichen, fällt aus) oder `line-changed`
+     (gelb hinterlegt, findet geändert statt)
+   - `showFrom` / `hideAfter` – Zeitfenster `[showFrom .. hideAfter)`; **Monate sind 0-basiert**
+     (`new Date(2026, 8, 18)` = 18. September 2026)
+
+Abgelaufene Einträge samt ihrer Hinweis-Boxen wieder löschen, damit die Datei nicht zuwächst.
+
+**Aktueller Eintrag (Stand 08.09.2026):** Nicole Schneiders Sprechstunde endet am
+Donnerstag, **17. September 2026** bereits um 14.00 Uhr (Konferenz um 14.00 Uhr). Der Hinweis
+läuft vom 8. bis einschließlich 17. September und kann danach entfernt werden.
+
+Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
+simulieren, ohne die Systemuhr zu stellen.
+
 ## E-Mail-Vorlage an Katja Klein (Beratung mit Begleitperson)
 
 Die beiden Links „E-Mail an Katja Klein schreiben" (Ferienkarte + Begleitperson-Schritt)
