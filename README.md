@@ -127,6 +127,10 @@ So wird ein Hinweis ergänzt:
 
 Abgelaufene Einträge samt ihrer Hinweis-Boxen wieder löschen, damit die Datei nicht zuwächst.
 
+Bei `textSwaps` (geänderte Uhrzeit in der Zeile) und bei `line-cancelled` `showFrom` so legen,
+dass **kein regulärer Termin derselben Berater\*in** mehr ins Fenster fällt — sonst wird dieser
+Termin mit falscher Zeit angezeigt oder durchgestrichen.
+
 `showFrom` darf auch eine Uhrzeit tragen (`new Date(2026, 8, 10, 14, 30)`). Sinnvoll ist als
 Startpunkt das Ende der **vorangehenden** Sprechstunde derselben Berater\*in: Wer vorher auf die
 Seite schaut, plant ohnehin für den früheren Termin, und der Hinweis stünde nur unnötig im Weg.
