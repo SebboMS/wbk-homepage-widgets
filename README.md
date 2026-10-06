@@ -131,13 +131,11 @@ Abgelaufene Einträge samt ihrer Hinweis-Boxen wieder löschen, damit die Datei 
 Startpunkt das Ende der **vorangehenden** Sprechstunde derselben Berater\*in: Wer vorher auf die
 Seite schaut, plant ohnehin für den früheren Termin, und der Hinweis stünde nur unnötig im Weg.
 
-**Aktueller Eintrag (Stand 08.09.2026):** Nicole Schneiders Sprechstunde endet am
-Donnerstag, **17. September 2026** bereits um 14.00 Uhr (Konferenz um 14.00 Uhr). Der Hinweis
-erscheint ab Donnerstag, 10. September, 14.30 Uhr (Ende ihrer Sprechstunde in der Woche davor)
-und läuft bis einschließlich 17. September; danach kann er entfernt werden. In dieser Zeit steht
-in der Sprechzeit-Zeile „Do, 13.00 – 14.00 Uhr", weil im Fenster nur dieser eine Donnerstag liegt.
-Wichtig beim Nachbauen: `showFrom` so legen, dass kein regulärer Termin derselben Berater\*in mehr
-ins Fenster fällt — sonst zeigt die Zeile für diesen Termin die falsche Zeit.
+**Aktueller Eintrag (Stand 06.10.2026):** Die Sprechstunde für Geflüchtete (Cylia Büsching)
+fällt am Mittwoch, **7. Oktober 2026** aus. Hinweis-Box dreisprachig (Deutsch, Englisch,
+Arabisch) im Endscreen `wbk-flu`, die Zeile „Zeit" wird durchgestrichen. Läuft vom 6. bis
+einschließlich 7. Oktober und kann danach entfernt werden. Der abgelaufene Eintrag zum
+17.09.2026 (Nicole Schneider) ist samt Boxen gelöscht.
 
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
 simulieren, ohne die Systemuhr zu stellen.

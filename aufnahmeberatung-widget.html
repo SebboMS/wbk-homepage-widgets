@@ -130,12 +130,17 @@
   <div id="wbk-flu" class="wbk-screen">
     <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
     <button class="back">&#8592; zur&#252;ck</button>
+    <!-- Ausfall Sprechstunde Cylia B&#252;sching am 07.10.2026 (datumsgesteuert, siehe Script unten) -->
+    <div id="wbk-flu-cb-0710" class="notice-warn">
+      <span class="nw-icon">&#9888;&#65039;</span>
+      <span class="nw-text">Am <strong>Mittwoch, 7. Oktober 2026</strong> f&#228;llt die Sprechstunde f&#252;r Gefl&#252;chtete aus.<br><span lang="en">The consultation on <strong>Wednesday, 7 October 2026</strong> is cancelled.</span><br><span dir="rtl" lang="ar">&#1578;&#1615;&#1604;&#1594;&#1609; &#1575;&#1604;&#1575;&#1587;&#1578;&#1588;&#1575;&#1585;&#1577; &#1610;&#1608;&#1605; &#1575;&#1604;&#1571;&#1585;&#1576;&#1593;&#1575;&#1569; 7 &#1571;&#1603;&#1578;&#1608;&#1576;&#1585; 2026.</span></span>
+    </div>
     <div class="card">
       <div class="card-label">Deine Beratung &#183; Your consultation &#183; &#1575;&#1587;&#1578;&#1588;&#1575;&#1585;&#1578;&#1603;</div>
       <div class="card-title">Sprechstunde f&#252;r Gefl&#252;chtete</div>
       <span class="badge-green">Kein Termin n&#246;tig &#183; No appointment needed &#183; &#1604;&#1575; &#1581;&#1575;&#1580;&#1577; &#1604;&#1605;&#1608;&#1593;&#1583;</span>
       <div class="row"><span class="key">Berater*in</span><span class="val">Cylia B&#252;sching</span></div>
-      <div class="row"><span class="key">Zeit</span><span class="val">Mittwoch, 12.00 &#8211; 13.30 Uhr</span></div>
+      <div class="row"><span class="key">Zeit</span><span class="val"><span id="wbk-flu-cb-line">Mittwoch, 12.00 &#8211; 13.30 Uhr</span></span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
       <div class="row"><span class="key">Hinweis</span><span class="val">Einfach vorbeikommen &#8211; kein Termin erforderlich.<br><span class="muted">You can come by without an appointment on Wednesday between 12 and 1:30 pm.</span><br><span class="muted" dir="rtl">&#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1604;&#1602;&#1583;&#1608;&#1605; &#1583;&#1608;&#1606; &#1605;&#1608;&#1593;&#1583; &#1610;&#1608;&#1605; &#1575;&#1604;&#1571;&#1585;&#1576;&#1593;&#1575;&#1569; &#1576;&#1610;&#1606; &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; 12 &#1608;1:30.</span></span></div>
     </div>
@@ -155,11 +160,6 @@
   <div id="wbk-beg-ms" class="wbk-screen">
     <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
     <button class="back">&#8592; zur&#252;ck</button>
-    <!-- Verk&#252;rzte Sprechstunde Nicole Schneider am 17.09.2026 (datumsgesteuert, siehe Script unten) -->
-    <div id="wbk-beg-ms-ns-1709" class="notice-warn">
-      <span class="nw-icon">&#128337;</span>
-      <span class="nw-text">Am <strong>Donnerstag, 17. September 2026</strong> endet die Sprechstunde von Nicole Schneider bereits um <strong>14.00 Uhr</strong> statt um 14.30 Uhr. Alle anderen Sprechzeiten bleiben unver&#228;ndert.</span>
-    </div>
     <div class="card">
       <div class="card-label">Deine Beratung</div>
       <div class="card-title">Beratung mit Begleitperson &#8211; M&#252;nster</div>
@@ -169,7 +169,7 @@
         <span class="step-num">1</span>
         <div>
           <p class="step-head">Kommt gemeinsam zu einer der regul&#228;ren Aufnahmesprechstunden in M&#252;nster:</p>
-          <p class="step-body">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br><span id="wbk-beg-ms-ns-line">Donnerstag, 13.00 &#8211; <span id="wbk-beg-ms-ns-end">14.30</span> Uhr <span class="muted">(Nicole Schneider)</span></span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></p>
+          <p class="step-body">Dienstag, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br>.30 Uhr <span class="muted">(Nicole Schneider)</span><br>Freitag, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></p>
         </div>
       </div>
       <div class="step" style="margin-bottom: 0 !important;">
@@ -203,17 +203,12 @@
   <div id="wbk-alg-ms" class="wbk-screen">
     <div class="prog"><div class="dot done"> </div><div class="dot done"> </div><div class="dot on"> </div></div>
     <button class="back">&#8592; zur&#252;ck</button>
-    <!-- Verk&#252;rzte Sprechstunde Nicole Schneider am 17.09.2026 (datumsgesteuert, siehe Script unten) -->
-    <div id="wbk-alg-ms-ns-1709" class="notice-warn">
-      <span class="nw-icon">&#128337;</span>
-      <span class="nw-text">Am <strong>Donnerstag, 17. September 2026</strong> endet die Sprechstunde von Nicole Schneider bereits um <strong>14.00 Uhr</strong> statt um 14.30 Uhr. Alle anderen Sprechzeiten bleiben unver&#228;ndert.</span>
-    </div>
     <div class="card">
       <div class="card-label">Deine Beratung</div>
       <div class="card-title">Allgemeine Aufnahmeberatung &#8211; M&#252;nster</div>
       <div style="background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 8px; padding: 12px 16px; margin: 0 0 16px !important; display: flex; align-items: center; gap: 12px;"><span style="font-size: 22px; flex-shrink: 0;">&#9989;</span><span style="font-size: 14px; font-weight: 500; color: #085041; line-height: 1.4;">Kein Termin erforderlich &#8211; einfach zu den Sprechzeiten vorbeikommen.</span></div>
       <div class="row"><span class="key">Berater*in</span><span class="val">Nicole Schneider, Sebastian Aufdemkamp oder Philipp Terwey</span></div>
-      <div class="row"><span class="key">Zeiten</span><span class="val">Di, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br><span id="wbk-alg-ms-ns-line">Do, 13.00 &#8211; <span id="wbk-alg-ms-ns-end">14.30</span> Uhr <span class="muted">(Nicole Schneider)</span></span><br>Fr, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span></div>
+      <div class="row"><span class="key">Zeiten</span><span class="val">Di, 17.00 &#8211; 18.30 Uhr <span class="muted">(Philipp Terwey)</span><br>.30 Uhr <span class="muted">(Nicole Schneider)</span><br>Fr, 12.00 &#8211; 13.30 Uhr <span class="muted">(Sebastian Aufdemkamp)</span></span></div>
       <div class="row"><span class="key">Ort</span><span class="val">Raum E.15 (Erdgeschoss, neben dem Sekretariat)<br>Uppenkampstiege 21, M&#252;nster</span></div>
     </div>
     <div class="redir">
@@ -324,16 +319,12 @@
      Monate sind 0-basiert: 0 = Januar, 8 = September.
      Abgelaufene Eintr&#228;ge k&#246;nnen samt ihrer Hinweis-Boxen wieder gel&#246;scht werden. */
   var ausfaelle = [
-    /* 17.09.2026: Nicole Schneider muss um 14.00 Uhr zur Konferenz, Sprechstunde endet
-       deshalb 30 Minuten frueher. Der Hinweis erscheint erst nach ihrer Sprechstunde in
-       der Woche davor - vorher betrifft er niemanden, der gerade plant vorbeizukommen. */
-    { noticeIds: ['wbk-alg-ms-ns-1709', 'wbk-beg-ms-ns-1709'],
-      lineIds:   ['wbk-alg-ms-ns-line', 'wbk-beg-ms-ns-line'],
-      lineClass: 'line-changed',
-      textSwaps: [{ id: 'wbk-alg-ms-ns-end', text: '14.00' },
-                  { id: 'wbk-beg-ms-ns-end', text: '14.00' }],
-      showFrom:  new Date(2026, 8, 10, 14, 30),  // Do, 10. September 2026, nach der Sprechstunde
-      hideAfter: new Date(2026, 8, 18) }         // bis einschl. 17. September 2026
+    /* 07.10.2026: Sprechstunde fuer Gefluechtete (Cylia Buesching) faellt aus. */
+    { noticeIds: ['wbk-flu-cb-0710'],
+      lineIds:   ['wbk-flu-cb-line'],
+      lineClass: 'line-cancelled',
+      showFrom:  new Date(2026, 9, 6),   // ab Di, 6. Oktober 2026
+      hideAfter: new Date(2026, 9, 8) }  // bis einschl. Mi, 7. Oktober 2026
   ];
   for (var i = 0; i < ausfaelle.length; i++) {
     var a = ausfaelle[i];
