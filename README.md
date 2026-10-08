@@ -126,12 +126,35 @@ So wird ein Hinweis ergänzt:
      (`new Date(2026, 8, 18)` = 18. September 2026)
 
 Abgelaufene Einträge samt ihrer Hinweis-Boxen wieder löschen, damit die Datei nicht zuwächst.
-Beim Löschen auch die `id`-Spans um die Zeilen (`…-line`, `…-end`) wieder auflösen — und danach
-**alle Stellen mit dieser Sprechzeit sichtbar prüfen**. Falle (06.10.2026 entstanden, 08.10.2026
-behoben): Eine Regex-Ersetzung mit `\1` direkt vor einer Ziffer (`\114.30`) wurde als Oktal-Escape
-gelesen; übrig blieb „.30 Uhr" mit einem unsichtbaren Steuerzeichen (U+008C) statt
-„Do, 13.00 – 14.30 Uhr". Ersetzungen im Klartext machen statt per Regex; Kontrolle:
-`python3 -c "import re;print(re.findall(r'[\x7f-\x9f]',open('aufnahmeberatung-widget.html').read()))"` muss `[]` ausgeben.
+Beim Löschen auch die `id`-Spans um die Zeilen (`…-line`, `…-end`) wieder auflösen, und zwar
+**per Klartext-Ersetzung, nicht per Regex**.
+
+### Automatische Prüfung vor jedem Commit (`pruefen.py`)
+
+Anlass: Am 06.10.2026 hat eine Regex-Ersetzung beim Auflösen dieser Spans die Sprechzeit von
+Nicole Schneider zerstört (`\1` direkt vor einer Ziffer, `\114.30`, wurde als Oktal-Escape
+gelesen). Im Widget stand zwei Tage „.30 Uhr" mit einem unsichtbaren Steuerzeichen (U+008C)
+statt „Do, 13.00 – 14.30 Uhr"; Sebastian hat es am 08.10.2026 auf der Homepage entdeckt.
+
+Seitdem läuft `pruefen.py` als **pre-commit-Hook** (`.githooks/pre-commit`) und blockiert den
+Commit, wenn
+
+1. Steuerzeichen in der Datei stehen,
+2. eine Sprechzeit-Zeile „… Uhr (Name)" nicht die Form „Tag, HH.MM – HH.MM Uhr" hat,
+3. vor „Uhr" keine vollständige Uhrzeit steht,
+4. dieselbe Person an verschiedenen Stellen verschiedene Sprechzeiten hat.
+
+Ändert sich eine reguläre Sprechzeit, also **alle** Stellen ändern, sonst schlägt Punkt 4 an.
+
+Der Hook ist **nur aktiv, wenn `core.hooksPath` gesetzt ist** (gilt je Klon, wird nicht mit
+übertragen). Nach einem neuen Klon einmal ausführen:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Von Hand prüfen: `python3 pruefen.py`. Getestet gegen den kaputten Stand `ab88f49` (schlägt an)
+und gegen `d77ed61` und den heutigen Stand (OK).
 
 Bei `textSwaps` (geänderte Uhrzeit in der Zeile) und bei `line-cancelled` `showFrom` so legen,
 dass **kein regulärer Termin derselben Berater\*in** mehr ins Fenster fällt — sonst wird dieser

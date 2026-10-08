@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blockiert Commits, wenn aufnahmeberatung-widget.html kaputte Sprechzeiten oder
+# Steuerzeichen enthaelt. Aktivieren (einmal je Klon): git config core.hooksPath .githooks
+exec python3 "$(git rev-parse --show-toplevel)/pruefen.py"
