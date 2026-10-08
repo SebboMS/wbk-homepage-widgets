@@ -126,6 +126,12 @@ So wird ein Hinweis ergänzt:
      (`new Date(2026, 8, 18)` = 18. September 2026)
 
 Abgelaufene Einträge samt ihrer Hinweis-Boxen wieder löschen, damit die Datei nicht zuwächst.
+Beim Löschen auch die `id`-Spans um die Zeilen (`…-line`, `…-end`) wieder auflösen — und danach
+**alle Stellen mit dieser Sprechzeit sichtbar prüfen**. Falle (06.10.2026 entstanden, 08.10.2026
+behoben): Eine Regex-Ersetzung mit `\1` direkt vor einer Ziffer (`\114.30`) wurde als Oktal-Escape
+gelesen; übrig blieb „.30 Uhr" mit einem unsichtbaren Steuerzeichen (U+008C) statt
+„Do, 13.00 – 14.30 Uhr". Ersetzungen im Klartext machen statt per Regex; Kontrolle:
+`python3 -c "import re;print(re.findall(r'[\x7f-\x9f]',open('aufnahmeberatung-widget.html').read()))"` muss `[]` ausgeben.
 
 Bei `textSwaps` (geänderte Uhrzeit in der Zeile) und bei `line-cancelled` `showFrom` so legen,
 dass **kein regulärer Termin derselben Berater\*in** mehr ins Fenster fällt — sonst wird dieser
