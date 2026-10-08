@@ -43,13 +43,20 @@ einfügen (Datei- und Widget-Namen ggf. anpassen):
 ```
 
 Danach genügt es, die Widget-Datei hier im Repo zu ändern und zu pushen – die
-Homepage lädt bei jedem Seitenaufruf automatisch den aktuellen Stand.
+Homepage lädt bei jedem Seitenaufruf den Stand, den GitHub gerade ausliefert.
+
+**Verzögerung bis zu ~5 Minuten:** `raw.githubusercontent.com` speichert die Datei je
+CDN-Server zwischen (`cache-control: max-age=300`). Das `?v=`-Cache-Busting im Loader hilft
+dagegen nicht. Nach einem Push liefern einzelne Server noch einige Minuten die alte Fassung,
+auch nach Neuladen und auf anderen Geräten (beobachtet 08.10.2026: Push 08:46, im Browser
+bis 08:50 alt, ab 08:50:33 neu). Erst nach 5 Minuten auf der Homepage nachsehen.
 
 ## Update-Workflow
 
 1. Widget-HTML hier im Repo anpassen.
 2. Commit + Push auf `main`.
-3. Fertig – kein Eingriff in WordPress nötig.
+3. Nach ~5 Minuten auf https://wbk.ms/was-zeichnet-uns-aus/ prüfen (dort ist das Widget
+   eingebunden) – kein Eingriff in WordPress nötig.
 
 ## Ferienmodus: vor den Sommerferien anpassen
 
