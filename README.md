@@ -171,11 +171,15 @@ Termin mit falscher Zeit angezeigt oder durchgestrichen.
 Startpunkt das Ende der **vorangehenden** Sprechstunde derselben Berater\*in: Wer vorher auf die
 Seite schaut, plant ohnehin für den früheren Termin, und der Hinweis stünde nur unnötig im Weg.
 
-**Aktueller Eintrag (Stand 06.10.2026):** Die Sprechstunde für Geflüchtete (Cylia Büsching)
-fällt am Mittwoch, **7. Oktober 2026** aus. Hinweis-Box dreisprachig (Deutsch, Englisch,
-Arabisch) im Endscreen `wbk-flu`, die Zeile „Zeit" wird durchgestrichen. Läuft vom 6. bis
-einschließlich 7. Oktober und kann danach entfernt werden. Der abgelaufene Eintrag zum
-17.09.2026 (Nicole Schneider) ist samt Boxen gelöscht.
+**Aktueller Eintrag (Stand 14.10.2026):** Die Freitags-Sprechstunde von Sebastian Aufdemkamp
+fällt vom **20. November bis 18. Dezember 2026** aus (Elternzeit). Hinweis-Boxen
+`wbk-alg-ms-ak-elternzeit` und `wbk-beg-ms-ak-elternzeit`, die Freitagszeilen
+(`wbk-alg-ms-ak-line`, `wbk-beg-ms-ak-line`) werden durchgestrichen. Fenster ab Fr 13.11.2026,
+13.30 Uhr (Ende der letzten regulären Sprechstunde davor) bis einschließlich 18.12.2026; danach
+Box und Spans per Klartext-Ersetzung entfernen. Geprüft mit `preview.html` an 13.11., 14.11.,
+20.11., 18.12., 19.12. **Offen:** Annabelle bietet in der Zeit eine Sprechstunde an, Termin
+noch nicht festgelegt (Sebastian, 14.10.2026); dann als eigene Zeile bzw. `line-changed` ergänzen.
+Der abgelaufene Eintrag zum 07.10.2026 (Cylia Büsching) ist samt Box und Span gelöscht.
 
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
 simulieren, ohne die Systemuhr zu stellen.
