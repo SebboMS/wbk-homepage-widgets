@@ -109,15 +109,21 @@ und beides nach Ablauf wieder entfernen.
 
 **Ferienhinweise** (keine Sprechstunden in den Ferien) laufen über dieses Banner, nicht über
 `ausfaelle`: Es steht über allen Screens und gilt damit für Münster, Rheine und die Sprechstunde
-für Geflüchtete zugleich. Sichtbar erst **nach der letzten Sprechstunde vor den Ferien**
-(Sebastian, 15.10.2026: vorher steht der Hinweis Bewerber\*innen im Weg, die noch kommen wollen)
-bis zum letzten Ferientag.
+für Geflüchtete zugleich. Je Ferien ein eigenes Banner (`id`) plus ein Eintrag im Script-Array
+`ferienBanner` (`id`, `von`, `bis`). Fenster: **ab dem Ende der letzten Sprechstunde vor den
+Ferien** (Sebastian, 15.10.2026: vorher steht der Hinweis Bewerber\*innen im Weg, die noch kommen
+wollen) bis zum Beginn des ersten Tages mit Sprechstunde danach. Im Text die Werktage der Ferien
+nennen und den ersten Tag mit regulären Sprechzeiten. Ferientermine aus
+`unterrichtsplanung/semester-*.md` (Abschnitt „Rahmentermine“) im WBK-Ordner.
 
-**Aktueller Eintrag (Stand 15.10.2026):** `wbk-herbstferien` — Herbstferien NRW 17.–31.10.2026,
-Text „19. bis 30. Oktober 2026“ (die Werktage), Fenster ab Fr 16.10.2026, 13.30 Uhr (Ende der
-Freitags-Sprechstunde) bis einschl. 01.11.2026 (`herbstFrom` / `herbstBis`). Geprüft mit
-`preview.html` an 16.10. 12.00 und 13.29 (aus), 16.10. 13.30, 17.10., 30.10., 01.11. (an),
-02.11. (aus). Danach Banner und Script-Block per Klartext-Ersetzung entfernen.
+**Aktuelle Einträge (Stand 15.10.2026):**
+
+| Banner | Ferien | Text | Fenster | Geprüft mit `preview.html` |
+| --- | --- | --- | --- | --- |
+| `wbk-herbstferien` | Sa 17.10.–Sa 31.10.2026 | „19. bis 30. Oktober 2026“, ab Mo 2. November | Fr 16.10.2026, 13.30 Uhr (Ende Freitags-Sprechstunde) bis einschl. 01.11.2026 | 16.10. 13.29 aus, 13.30 an, 01.11. 23.00 an, 02.11. aus |
+| `wbk-weihnachtsferien` | Mi 23.12.2026–Mi 06.01.2027 | „23. Dezember 2026 bis 6. Januar 2027“, ab Do 7. Januar | Di 22.12.2026, 18.30 Uhr (Ende Dienstags-Sprechstunde) bis einschl. 06.01.2027 | 22.12. 18.29 aus, 18.30 an, 24.12. an, 06.01. 23.00 an, 07.01. aus |
+
+Nach Ablauf Banner und Array-Eintrag per Klartext-Ersetzung entfernen.
 
 ## Datumsgesteuerte Ausfall- und Änderungs-Hinweise
 

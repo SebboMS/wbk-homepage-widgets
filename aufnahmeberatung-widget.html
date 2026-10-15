@@ -83,10 +83,14 @@
 <div id="wbk" class="wbk">
   <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
   <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
-  <!-- Herbstferien 2026: Banner datumsgesteuert, siehe Script unten -->
+  <!-- Ferien-Banner: datumsgesteuert, siehe ferienBanner im Script unten -->
   <div id="wbk-herbstferien" class="deadline-banner">
     <span class="db-icon">&#127810;</span>
     <span class="db-text">In den Herbstferien vom <strong>19. bis 30. Oktober 2026</strong> finden keine Sprechstunden statt. Ab <strong>Montag, 2. November</strong>, gelten wieder die regul&#228;ren Sprechzeiten.</span>
+  </div>
+  <div id="wbk-weihnachtsferien" class="deadline-banner">
+    <span class="db-icon">&#127876;</span>
+    <span class="db-text">In den Weihnachtsferien vom <strong>23. Dezember 2026 bis 6. Januar 2027</strong> finden keine Sprechstunden statt. Ab <strong>Donnerstag, 7. Januar</strong>, gelten wieder die regul&#228;ren Sprechzeiten.</span>
   </div>
   <!-- Screen 1: Wer? -->
   <div id="wbk-0" class="wbk-screen wbk-active">
@@ -307,13 +311,25 @@
     }
   }
 
-  /* --- Herbstferien 2026 (Sa 17.10. - Sa 31.10.): Banner oben bis einschl. 1. November ---
-     Nach Ablauf Banner und diesen Block wieder entfernen. */
-  var herbstFrom = new Date(2026, 9, 16, 13, 30); // nach der letzten Sprechstunde Fr, 16. Oktober 2026
-  var herbstBis  = new Date(2026, 10, 2); // ab 2. November 2026, 00:00 ausblenden
-  if (now >= herbstFrom && now < herbstBis) {
-    var hf = document.getElementById('wbk-herbstferien');
-    if (hf) hf.style.display = 'flex';
+  /* --- Ferien-Banner oben ---
+     Sichtbar im Zeitfenster [von .. bis): ab dem Ende der letzten Sprechstunde vor den Ferien
+     bis zum Beginn des ersten Tages mit Sprechstunde danach. Monate sind 0-basiert.
+     Abgelaufene Eintraege samt Banner wieder entfernen. */
+  var ferienBanner = [
+    /* Herbstferien 2026 (Sa 17.10. - Sa 31.10.) */
+    { id: 'wbk-herbstferien',
+      von: new Date(2026, 9, 16, 13, 30),  // nach der letzten Sprechstunde Fr, 16. Oktober 2026
+      bis: new Date(2026, 10, 2) },        // ab Mo, 2. November 2026, 00:00 ausblenden
+    /* Weihnachtsferien 2026/27 (Mi 23.12. - Mi 06.01.) */
+    { id: 'wbk-weihnachtsferien',
+      von: new Date(2026, 11, 22, 18, 30), // nach der letzten Sprechstunde Di, 22. Dezember 2026
+      bis: new Date(2027, 0, 7) }          // ab Do, 7. Januar 2027, 00:00 ausblenden
+  ];
+  for (var fb = 0; fb < ferienBanner.length; fb++) {
+    if (now >= ferienBanner[fb].von && now < ferienBanner[fb].bis) {
+      var fbEl = document.getElementById(ferienBanner[fb].id);
+      if (fbEl) fbEl.style.display = 'flex';
+    }
   }
 
   /* --- Datumsgesteuerte Ausfall- und Aenderungs-Hinweise ---
