@@ -318,7 +318,7 @@
 
   /* --- Herbstferien 2026 (Sa 17.10. - Sa 31.10.): Banner oben bis einschl. 1. November ---
      Nach Ablauf Banner und diesen Block wieder entfernen. */
-  var herbstFrom = new Date(2026, 9, 12); // 12. Oktober 2026 (Woche vor den Ferien)
+  var herbstFrom = new Date(2026, 9, 16, 13, 30); // nach der letzten Sprechstunde Fr, 16. Oktober 2026
   var herbstBis  = new Date(2026, 10, 2); // ab 2. November 2026, 00:00 ausblenden
   if (now >= herbstFrom && now < herbstBis) {
     var hf = document.getElementById('wbk-herbstferien');

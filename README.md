@@ -109,12 +109,15 @@ und beides nach Ablauf wieder entfernen.
 
 **Ferienhinweise** (keine Sprechstunden in den Ferien) laufen über dieses Banner, nicht über
 `ausfaelle`: Es steht über allen Screens und gilt damit für Münster, Rheine und die Sprechstunde
-für Geflüchtete zugleich. Sichtbar ab der Woche vor den Ferien bis zum letzten Ferientag.
+für Geflüchtete zugleich. Sichtbar erst **nach der letzten Sprechstunde vor den Ferien**
+(Sebastian, 15.10.2026: vorher steht der Hinweis Bewerber\*innen im Weg, die noch kommen wollen)
+bis zum letzten Ferientag.
 
 **Aktueller Eintrag (Stand 15.10.2026):** `wbk-herbstferien` — Herbstferien NRW 17.–31.10.2026,
-Text „19. bis 30. Oktober 2026“ (die Werktage), Fenster 12.10.2026 bis einschl. 01.11.2026
-(`herbstFrom` / `herbstBis`). Geprüft mit `preview.html` an 11.10. (aus), 12.10., 15.10., 30.10.,
-01.11. (an), 02.11. (aus). Danach Banner und Script-Block per Klartext-Ersetzung entfernen.
+Text „19. bis 30. Oktober 2026“ (die Werktage), Fenster ab Fr 16.10.2026, 13.30 Uhr (Ende der
+Freitags-Sprechstunde) bis einschl. 01.11.2026 (`herbstFrom` / `herbstBis`). Geprüft mit
+`preview.html` an 16.10. 12.00 und 13.29 (aus), 16.10. 13.30, 17.10., 30.10., 01.11. (an),
+02.11. (aus). Danach Banner und Script-Block per Klartext-Ersetzung entfernen.
 
 ## Datumsgesteuerte Ausfall- und Änderungs-Hinweise
 
