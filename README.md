@@ -107,6 +107,15 @@ abgelaufenen Termine in der Datei liegen bleiben. Zum Einsetzen direkt nach dem 
 Dazu im Script ein Zeitfenster ergänzen (`if (now >= von && now < bis) { …style.display = 'flex'; }`)
 und beides nach Ablauf wieder entfernen.
 
+**Ferienhinweise** (keine Sprechstunden in den Ferien) laufen über dieses Banner, nicht über
+`ausfaelle`: Es steht über allen Screens und gilt damit für Münster, Rheine und die Sprechstunde
+für Geflüchtete zugleich. Sichtbar ab der Woche vor den Ferien bis zum letzten Ferientag.
+
+**Aktueller Eintrag (Stand 15.10.2026):** `wbk-herbstferien` — Herbstferien NRW 17.–31.10.2026,
+Text „19. bis 30. Oktober 2026“ (die Werktage), Fenster 12.10.2026 bis einschl. 01.11.2026
+(`herbstFrom` / `herbstBis`). Geprüft mit `preview.html` an 11.10. (aus), 12.10., 15.10., 30.10.,
+01.11. (an), 02.11. (aus). Danach Banner und Script-Block per Klartext-Ersetzung entfernen.
+
 ## Datumsgesteuerte Ausfall- und Änderungs-Hinweise
 
 Kurzfristige Abweichungen bei den Sprechzeiten (Ausfall, Vertretung, verkürzte Sprechstunde)

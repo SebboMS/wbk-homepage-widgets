@@ -82,6 +82,11 @@
 <div id="wbk" class="wbk">
   <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
   <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
+  <!-- Herbstferien 2026: Banner datumsgesteuert, siehe Script unten -->
+  <div id="wbk-herbstferien" class="deadline-banner">
+    <span class="db-icon">&#127810;</span>
+    <span class="db-text">In den Herbstferien vom <strong>19. bis 30. Oktober 2026</strong> finden keine Sprechstunden statt. Ab <strong>Montag, 2. November</strong>, gelten wieder die regul&#228;ren Sprechzeiten.</span>
+  </div>
   <!-- Screen 1: Wer? -->
   <div id="wbk-0" class="wbk-screen wbk-active">
     <div class="prog"><div class="dot on"> </div><div class="dot"> </div><div class="dot"> </div></div>
@@ -309,6 +314,15 @@
       var nach = document.getElementById('wbk-holiday-nachreichen');
       if (nach) nach.style.display = 'none';
     }
+  }
+
+  /* --- Herbstferien 2026 (Sa 17.10. - Sa 31.10.): Banner oben bis einschl. 1. November ---
+     Nach Ablauf Banner und diesen Block wieder entfernen. */
+  var herbstFrom = new Date(2026, 9, 12); // 12. Oktober 2026 (Woche vor den Ferien)
+  var herbstBis  = new Date(2026, 10, 2); // ab 2. November 2026, 00:00 ausblenden
+  if (now >= herbstFrom && now < herbstBis) {
+    var hf = document.getElementById('wbk-herbstferien');
+    if (hf) hf.style.display = 'flex';
   }
 
   /* --- Datumsgesteuerte Ausfall- und Aenderungs-Hinweise ---
