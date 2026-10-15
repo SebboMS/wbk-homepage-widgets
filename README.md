@@ -135,7 +135,8 @@ So wird ein Hinweis ergänzt:
 3. Im Script unten einen Eintrag im Array `ausfaelle` ergänzen:
    - `noticeIds` – ids der Hinweis-Boxen
    - `lineIds` – (optional) ids der markierten Zeilen
-   - `lineClass` – `line-cancelled` (durchgestrichen, fällt aus) oder `line-changed`
+   - `lineClass` – `line-cancelled` (durchgestrichen, fällt aus), `line-hidden` (ganz
+     ausgeblendet, entfällt ohne Hinweis; dann keine Hinweis-Box nötig) oder `line-changed`
      (gelb hinterlegt, findet geändert statt)
    - `textSwaps` – (optional) `[{ id, text }]`: ersetzt im Zeitfenster den Text einzelner
      Elemente. Damit steht in der Sprechzeit-Zeile direkt die geänderte Uhrzeit. Dafür ist die
@@ -183,14 +184,18 @@ Termin mit falscher Zeit angezeigt oder durchgestrichen.
 Startpunkt das Ende der **vorangehenden** Sprechstunde derselben Berater\*in: Wer vorher auf die
 Seite schaut, plant ohnehin für den früheren Termin, und der Hinweis stünde nur unnötig im Weg.
 
-**Aktueller Eintrag (Stand 14.10.2026):** Die Freitags-Sprechstunde von Sebastian Aufdemkamp
-fällt vom **20. November bis 18. Dezember 2026** aus (Elternzeit). Hinweis-Boxen
-`wbk-alg-ms-ak-elternzeit` und `wbk-beg-ms-ak-elternzeit`, die Freitagszeilen
-(`wbk-alg-ms-ak-line`, `wbk-beg-ms-ak-line`) werden durchgestrichen. Fenster ab Fr 13.11.2026,
-13.30 Uhr (Ende der letzten regulären Sprechstunde davor) bis einschließlich 18.12.2026; danach
-Box und Spans per Klartext-Ersetzung entfernen. Geprüft mit `preview.html` an 13.11., 14.11.,
-20.11., 18.12., 19.12. **Offen:** Annabelle bietet in der Zeit eine Sprechstunde an, Termin
-noch nicht festgelegt (Sebastian, 14.10.2026); dann als eigene Zeile bzw. `line-changed` ergänzen.
+**Aktueller Eintrag (Stand 15.10.2026):** Die Freitags-Sprechstunde von Sebastian Aufdemkamp
+findet vom **20. November bis 18. Dezember 2026** nicht statt (Elternzeit). Sie wird in der Zeit
+**ganz ausgeblendet, ohne Hinweis-Box** (Sebastian, 15.10.2026: „Die findet dann einfach nicht
+statt.“). Die Freitagszeilen (`wbk-alg-ms-ak-line`, `wbk-beg-ms-ak-line`) bekommen `line-hidden`,
+in der Berater-Zeile (`wbk-alg-ms-berater`) ersetzt ein `textSwap` den Text durch „Nicole
+Schneider oder Philipp Terwey“. Der Zeilenumbruch `<br>` steht dafür **innerhalb** der Spans,
+sonst bliebe eine Leerzeile. Fenster ab Fr 13.11.2026, 13.30 Uhr (Ende der letzten regulären
+Sprechstunde davor) bis einschließlich 18.12.2026; danach Eintrag und Spans per
+Klartext-Ersetzung entfernen. Geprüft mit `preview.html` an 13.11. 12.00 (sichtbar), 13.11. 13.30,
+20.11., 18.12. (ausgeblendet), 19.12. (sichtbar). **Offen:** Annabelle bietet in der Zeit eine
+Sprechstunde an, Termin noch nicht festgelegt (Sebastian, 14.10.2026); dann als eigene Zeile
+ergänzen. Die früheren Hinweis-Boxen `wbk-*-ms-ak-elternzeit` sind gelöscht.
 Der abgelaufene Eintrag zum 07.10.2026 (Cylia Büsching) ist samt Box und Span gelöscht.
 
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
