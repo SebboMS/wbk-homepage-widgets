@@ -204,8 +204,27 @@ Sprechstunde an, Termin noch nicht festgelegt (Sebastian, 14.10.2026); dann als 
 ergänzen. Die früheren Hinweis-Boxen `wbk-*-ms-ak-elternzeit` sind gelöscht.
 Der abgelaufene Eintrag zum 07.10.2026 (Cylia Büsching) ist samt Box und Span gelöscht.
 
+**Zweiter Eintrag (Stand 09.11.2026):** Die Donnerstags-Sprechstunde von Nicole Schneider fällt
+am **26. November 2026** aus („in der Konferenzwoche“; das Datum hat sie nicht genannt, es ist aus
+dem Schulkalender erschlossen: KW 48 mit Konferenzen an vier Tagen, Do 13.30 BB-Konferenz ARS;
+Sebastian hat den Eintrag am 09.11.2026 freigegeben). Hinweis-Boxen `wbk-alg-ms-ns-2611` und
+`wbk-beg-ms-ns-2611`, die Donnerstagszeilen `wbk-alg-ms-ns-line` und `wbk-beg-ms-ns-line` werden
+durchgestrichen (`line-cancelled`). Fenster Do 19.11.2026, 14.30 Uhr (Ende ihrer Sprechstunde
+davor) bis Do 26.11.2026, 14.30 Uhr. Geprüft an 19.11. 14.29 (aus), 14.30 (an), 24.11. (an),
+26.11. 14.29 (an), 14.30 (aus), 03.12. (aus). Danach Boxen, Array-Eintrag und die
+`…-ns-line`-Spans per Klartext-Ersetzung entfernen.
+
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
-simulieren, ohne die Systemuhr zu stellen.
+simulieren, ohne die Systemuhr zu stellen. Die Seite setzt die Uhrzeit fest auf 12.00 Uhr; für
+Grenzzeiten wie 14.29/14.30 die Widget-Datei per `javascript_tool` mit eigener Uhrzeit in ein
+iframe schreiben (Mock wie `mockScript` in `preview.html`, nur mit Stunde und Minute).
+
+**Falle Vorschau-Server (09.11.2026):** Ein über `preview_start` gestarteter Server darf den
+Ordner unter `~/Documents` nicht lesen (`getcwd: Operation not permitted`). Ausweg: Widget und
+`preview.html` in den Scratchpad der Sitzung kopieren und von dort servieren
+(`/bin/sh -c "cd <scratchpad>/widget-vorschau && python3 -m http.server ${PORT}"` als
+launch.json-Eintrag). Der Browser-Pane öffnet nur den Port, den `preview_start` zurückmeldet,
+deshalb `${PORT}` statt einer festen Zahl.
 
 ## E-Mail-Vorlage an Katja Klein (Beratung mit Begleitperson)
 
