@@ -1,0 +1,91 @@
+{
+ "hinweis": "Abgeleitet aus aufnahmeberatung-widget.html durch daten.py. Nicht von Hand ändern.",
+ "zeitzone": "Europe/Berlin",
+ "semester": {
+  "name": "Sommersemester 2027",
+  "start": "Februar 2027"
+ },
+ "muenster": {
+  "ort": "Raum E.15 (Erdgeschoss, neben dem Sekretariat), Uppenkampstiege 21, Münster",
+  "termin": "ohne",
+  "zeiten": [
+   {
+    "tag": "Dienstag",
+    "von": "17.00",
+    "bis": "18.30",
+    "name": "Philipp Terwey",
+    "art": "allgemein"
+   },
+   {
+    "tag": "Mittwoch",
+    "von": "12.00",
+    "bis": "13.30",
+    "name": "Cylia Büsching",
+    "art": "gefluechtete",
+    "zusatz": "Sprechstunde für Geflüchtete"
+   },
+   {
+    "tag": "Donnerstag",
+    "von": "13.00",
+    "bis": "14.30",
+    "name": "Nicole Schneider",
+    "art": "allgemein",
+    "kennung": "ns"
+   },
+   {
+    "tag": "Freitag",
+    "von": "12.00",
+    "bis": "13.30",
+    "name": "Sebastian Aufdemkamp",
+    "art": "allgemein",
+    "kennung": "ak"
+   }
+  ]
+ },
+ "rheine": {
+  "tag": "Donnerstag",
+  "von": "19.00",
+  "bis": "21.00",
+  "name": "Boris Rüping",
+  "zusatz": "nur Fachhochschulreife & Abitur",
+  "termin": "erforderlich",
+  "buchung": "https://www.abendgymnasium-rheine.de/kontakt.php?termin=1#kontaktformular"
+ },
+ "ausfaelle": [
+  {
+   "von": "2026-11-13T13:30",
+   "bis": "2026-12-19T00:00",
+   "art": "entfaellt",
+   "betrifft": [
+    "Sebastian Aufdemkamp"
+   ],
+   "hinweis": null
+  },
+  {
+   "von": "2026-11-19T14:30",
+   "bis": "2026-11-26T14:30",
+   "art": "faellt-aus",
+   "betrifft": [
+    "Nicole Schneider"
+   ],
+   "hinweis": "Am Donnerstag, 26. November 2026, fällt die Sprechstunde von Nicole Schneider aus. Bitte komm zu einer anderen Sprechzeit."
+  }
+ ],
+ "ferien": [
+  {
+   "von": "2026-10-16T13:30",
+   "bis": "2026-11-02T00:00",
+   "hinweis": "In den Herbstferien vom 19. bis 30. Oktober 2026 finden keine Sprechstunden statt. Ab Montag, 2. November, gelten wieder die regulären Sprechzeiten."
+  },
+  {
+   "von": "2026-12-22T18:30",
+   "bis": "2027-01-07T00:00",
+   "hinweis": "In den Weihnachtsferien vom 23. Dezember 2026 bis 6. Januar 2027 finden keine Sprechstunden statt. Ab Donnerstag, 7. Januar, gelten wieder die regulären Sprechzeiten."
+  }
+ ],
+ "sommerpause": {
+  "von": "2026-07-16T00:00",
+  "bis": "2026-09-01T00:00",
+  "hinweis": "Die Anmeldephase für das laufende Schuljahr ist am 15. Juli 2026 zu Ende gegangen. Die persönliche Aufnahmeberatung macht bis zum Ende der Sommerferien (NRW: 20. Juli – 1. September 2026) Pause."
+ }
+}

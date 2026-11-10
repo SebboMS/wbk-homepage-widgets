@@ -1,4 +1,9 @@
 #!/bin/sh
-# Blockiert Commits, wenn aufnahmeberatung-widget.html kaputte Sprechzeiten oder
-# Steuerzeichen enthaelt. Aktivieren (einmal je Klon): git config core.hooksPath .githooks
-exec python3 "$(git rev-parse --show-toplevel)/pruefen.py"
+# Blockiert Commits, wenn aufnahmeberatung-widget.html kaputte Sprechzeiten oder Steuerzeichen enthaelt.
+# Danach schreibt daten.py die Sprechzeiten, Ausfaelle und Ferienhinweise nach sprechzeiten.json (fuer die neue
+# Homepage) und nimmt die Datei mit in den Commit. Aktivieren (einmal je Klon): git config core.hooksPath .githooks
+set -e
+top="$(git rev-parse --show-toplevel)"
+python3 "$top/pruefen.py"
+python3 "$top/daten.py"
+git add "$top/sprechzeiten.json"

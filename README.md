@@ -51,6 +51,29 @@ dagegen nicht. Nach einem Push liefern einzelne Server noch einige Minuten die a
 auch nach Neuladen und auf anderen Geräten (beobachtet 08.10.2026: Push 08:46, im Browser
 bis 08:50 alt, ab 08:50:33 neu). Erst nach 5 Minuten auf der Homepage nachsehen.
 
+## Datendatei für die neue Homepage (seit 10.11.2026)
+
+Die Sprechzeiten pflegst du weiter nur hier im Widget. Beim Commit schreibt `daten.py` daraus `sprechzeiten.json`:
+regelmäßige Sprechzeiten (Münster mit der Sprechstunde für Geflüchtete, Rheine mit Buchungslink), Semester, Ausfälle
+(`ausfaelle` mit Zeitfenster, Art und Hinweistext), Ferienhinweise (`ferienBanner`) und die Sommerpause. Die neue
+Homepage (Repo `SebboMS/wbk-homepage`, Entwurf auf wbkneu.wbk.ms) lädt die Datei von
+`https://raw.githubusercontent.com/SebboMS/wbk-homepage-widgets/main/sprechzeiten.json` und zeigt Sprechzeiten,
+Ausfälle und Ferien in ihrer eigenen Gestaltung. Klappt das Laden nicht, zeigt sie ihre feste Liste.
+
+- Die Datei nie von Hand ändern; sie entsteht im pre-commit-Hook (`.githooks/pre-commit`: erst `pruefen.py`, dann
+  `daten.py`, dann `git add sprechzeiten.json`). Von Hand: `python3 daten.py`, Abgleich: `python3 daten.py --pruefen`.
+- Gelesen wird aus dem Endscreen `wbk-alg-ms` (Zeile „Zeiten“, markierbare Zeilen `wbk-alg-ms-xx-line`),
+  `wbk-flu` (Geflüchtete), `wbk-alg-rh` (Rheine), den Hinweis-Boxen (`nw-text`), den Bannern (`db-text`) und den
+  Listen `ausfaelle` und `ferienBanner` im Script. Wird eine dieser Stellen umgebaut, bricht `daten.py` mit einer
+  Meldung ab und der Commit geht nicht durch, bis das Skript angepasst ist.
+- Ein Ausfall nennt auf der Homepage die Person über die `lineIds` (`wbk-alg-ms-xx-line`). Ohne Hinweis-Box
+  (`line-hidden`) verschwindet die Zeile dort einfach, wie im Widget.
+- Verzögerung wie beim Widget: bis zu 5 Minuten (Zwischenspeicher von raw.githubusercontent.com).
+
+Warum so und nicht umgekehrt: Das Widget läuft live auf wbk.ms. Es aus einer Datendatei aufzubauen, hätte es
+umgebaut; so bleibt es unverändert, und die Homepage folgt ihm. Eine Datenbank (Martins MySQL) wäre erst nötig, wenn
+mehrere Personen über ein Formular eintragen sollen; die Homepage könnte dann dieselbe Datei von dort lesen.
+
 ## Update-Workflow
 
 1. Widget-HTML hier im Repo anpassen.
