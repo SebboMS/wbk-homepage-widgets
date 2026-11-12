@@ -222,9 +222,23 @@ Schneider oder Philipp Terwey“. Der Zeilenumbruch `<br>` steht dafür **innerh
 sonst bliebe eine Leerzeile. Fenster ab Fr 13.11.2026, 13.30 Uhr (Ende der letzten regulären
 Sprechstunde davor) bis einschließlich 18.12.2026; danach Eintrag und Spans per
 Klartext-Ersetzung entfernen. Geprüft mit `preview.html` an 13.11. 12.00 (sichtbar), 13.11. 13.30,
-20.11., 18.12. (ausgeblendet), 19.12. (sichtbar). **Offen:** Annabelle bietet in der Zeit eine
-Sprechstunde an, Termin noch nicht festgelegt (Sebastian, 14.10.2026); dann als eigene Zeile
-ergänzen. Die früheren Hinweis-Boxen `wbk-*-ms-ak-elternzeit` sind gelöscht.
+20.11., 18.12. (ausgeblendet), 19.12. (sichtbar). Die früheren Hinweis-Boxen `wbk-*-ms-ak-elternzeit` sind gelöscht.
+
+**Montags-Sprechstunde Annabelle Aufdemkamp (Stand 12.11.2026):** Mo 10.00 – 11.30 Uhr, vom
+**30. November 2026 bis 25. Januar 2027** (Semesterende; zum Sommersemester legt Sebastian die Sprechzeiten
+neu fest). Der erste angesetzte Termin am 23.11. entfällt, sie kann ihn nicht wahrnehmen. Die Zeile steht im
+Markup (`wbk-alg-ms-adk-line`, `wbk-beg-ms-adk-line`, `<br>` innerhalb der Spans) und wird außerhalb
+der Zeit über zwei `line-hidden`-Einträge ausgeblendet: bis Mo 23.11.2026, 11.30 Uhr, und ab Mo
+25.01.2027, 11.30 Uhr (offenes Ende 31.12.2027 als Platzhalter). Die Berater-Zeile nennt sie im Markup;
+die beiden Einträge setzen per `textSwap` den Text ohne sie. Wegen der Berater-Zeile ist der
+Elternzeit-Eintrag in zwei geteilt (bis und ab 23.11., 11.30 Uhr) und steht im Array **nach** den
+Annabelle-Einträgen, damit sein `textSwap` gewinnt. Berater-Zeile je Zeitraum: bis 13.11. 13.30 „Nicole
+Schneider, Sebastian Aufdemkamp oder Philipp Terwey“, bis 23.11. 11.30 „Nicole Schneider oder Philipp
+Terwey“, bis 18.12. „Nicole Schneider, Philipp Terwey oder Annabelle Aufdemkamp“, bis 25.01. alle vier,
+danach wieder die drei. Geprüft per headless Chrome mit Datums-Mock an 12.11. 16.00, 13.11. 13.29/13.30,
+23.11. 11.29/11.30, 18.12., 19.12., 25.01. 11.29/11.30, 05.02.2027.
+**Zum Sommersemester:** Zeile, Spans und alle vier Einträge entfernen bzw. auflösen (Klartext-Ersetzung)
+und die Berater-Zeile im Markup auf die neuen Namen setzen.
 Der abgelaufene Eintrag zum 07.10.2026 (Cylia Büsching) ist samt Box und Span gelöscht.
 
 **Zweiter Eintrag (Stand 09.11.2026):** Die Donnerstags-Sprechstunde von Nicole Schneider fällt
