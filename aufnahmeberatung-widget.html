@@ -174,6 +174,10 @@
       <span class="nw-icon">&#9888;&#65039;</span>
       <span class="nw-text">Am <strong>Donnerstag, 26. November 2026</strong>, f&#228;llt die Sprechstunde von Nicole Schneider aus. Bitte kommt zu einer anderen Sprechzeit.</span>
     </div>
+    <div id="wbk-beg-ms-ns-1401" class="notice-warn">
+      <span class="nw-icon">&#9888;&#65039;</span>
+      <span class="nw-text">Am <strong>Donnerstag, 14. Januar 2027</strong>, f&#228;llt die Sprechstunde von Nicole Schneider aus. Bitte kommt zu einer anderen Sprechzeit oder am selben Tag ab 18.00 Uhr zum Info- und Beratungsabend.</span>
+    </div>
     <div class="card">
       <div class="card-label">Deine Beratung</div>
       <div class="card-title">Beratung mit Begleitperson &#8211; M&#252;nster</div>
@@ -221,6 +225,10 @@
     <div id="wbk-alg-ms-ns-2611" class="notice-warn">
       <span class="nw-icon">&#9888;&#65039;</span>
       <span class="nw-text">Am <strong>Donnerstag, 26. November 2026</strong>, f&#228;llt die Sprechstunde von Nicole Schneider aus. Bitte komm zu einer anderen Sprechzeit.</span>
+    </div>
+    <div id="wbk-alg-ms-ns-1401" class="notice-warn">
+      <span class="nw-icon">&#9888;&#65039;</span>
+      <span class="nw-text">Am <strong>Donnerstag, 14. Januar 2027</strong>, f&#228;llt die Sprechstunde von Nicole Schneider aus. Bitte komm zu einer anderen Sprechzeit oder am selben Tag ab 18.00 Uhr zum Info- und Beratungsabend.</span>
     </div>
     <div class="card">
       <div class="card-label">Deine Beratung</div>
@@ -412,7 +420,14 @@
       lineIds:   ['wbk-alg-ms-ns-line', 'wbk-beg-ms-ns-line'],
       lineClass: 'line-cancelled',
       showFrom:  new Date(2026, 10, 19, 14, 30), // nach ihrer Sprechstunde Do, 19. November 2026
-      hideAfter: new Date(2026, 10, 26, 14, 30) } // nach dem Ende der ausfallenden Sprechstunde
+      hideAfter: new Date(2026, 10, 26, 14, 30) }, // nach dem Ende der ausfallenden Sprechstunde
+    /* Do 14.01.2027: Sprechstunde Nicole Schneider faellt aus (Info- und Beratungsabend am
+       selben Tag ab 18.00 Uhr; Sebastian, 12.11.2026). */
+    { noticeIds: ['wbk-alg-ms-ns-1401', 'wbk-beg-ms-ns-1401'],
+      lineIds:   ['wbk-alg-ms-ns-line', 'wbk-beg-ms-ns-line'],
+      lineClass: 'line-cancelled',
+      showFrom:  new Date(2027, 0, 7, 14, 30),  // nach ihrer Sprechstunde Do, 7. Januar 2027
+      hideAfter: new Date(2027, 0, 14, 14, 30) } // nach dem Ende der ausfallenden Sprechstunde
   ];
   for (var i = 0; i < ausfaelle.length; i++) {
     var a = ausfaelle[i];

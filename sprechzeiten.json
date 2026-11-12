@@ -104,6 +104,15 @@
     "Nicole Schneider"
    ],
    "hinweis": "Am Donnerstag, 26. November 2026, fällt die Sprechstunde von Nicole Schneider aus. Bitte komm zu einer anderen Sprechzeit."
+  },
+  {
+   "von": "2027-01-07T14:30",
+   "bis": "2027-01-14T14:30",
+   "art": "faellt-aus",
+   "betrifft": [
+    "Nicole Schneider"
+   ],
+   "hinweis": "Am Donnerstag, 14. Januar 2027, fällt die Sprechstunde von Nicole Schneider aus. Bitte komm zu einer anderen Sprechzeit oder am selben Tag ab 18.00 Uhr zum Info- und Beratungsabend."
   }
  ],
  "ferien": [

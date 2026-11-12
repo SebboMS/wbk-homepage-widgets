@@ -263,6 +263,14 @@ davor) bis Do 26.11.2026, 14.30 Uhr. Geprüft an 19.11. 14.29 (aus), 14.30 (an),
 26.11. 14.29 (an), 14.30 (aus), 03.12. (aus). Danach Boxen, Array-Eintrag und die
 `…-ns-line`-Spans per Klartext-Ersetzung entfernen.
 
+**Dritter Eintrag (Stand 12.11.2026):** Am **Do 14.01.2027** fällt die Sprechstunde von Nicole Schneider
+aus, weil am Abend der Info- und Beratungsabend stattfindet (Sebastian, 12.11.2026). Hinweis-Boxen
+`wbk-alg-ms-ns-1401` und `wbk-beg-ms-ns-1401` verweisen auf den Abend ab 18.00 Uhr (Text durch den
+Humanizer), die Donnerstagszeilen werden durchgestrichen. Fenster Do 07.01.2027, 14.30 Uhr, bis Do
+14.01.2027, 14.30 Uhr. Geprüft an 07.01. 14.29 (aus), 14.30 (an), 12.01., 14.01. 14.29 (an), 14.30 (aus)
+und am 24.11.2026 (nur der Eintrag zum 26.11. aktiv). Die `…-ns-line`-Spans erst entfernen, wenn beide
+Einträge abgelaufen sind.
+
 Getestet wird mit `preview.html` (lokal, nicht im Repo): dort lässt sich ein beliebiges Datum
 simulieren, ohne die Systemuhr zu stellen. Die Seite setzt die Uhrzeit fest auf 12.00 Uhr; für
 Grenzzeiten wie 14.29/14.30 die Widget-Datei per `javascript_tool` mit eigener Uhrzeit in ein
