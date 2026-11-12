@@ -130,6 +130,18 @@ abgelaufenen Termine in der Datei liegen bleiben. Zum Einsetzen direkt nach dem 
 Dazu im Script ein Zeitfenster ergänzen (`if (now >= von && now < bis) { …style.display = 'flex'; }`)
 und beides nach Ablauf wieder entfernen.
 
+**Termin-Banner** (Veranstaltungen) laufen über dieselbe Klasse mit eigenem Script-Array `terminBanner`
+(`id`, `von`, `bis`), das wie `ferienBanner` abgearbeitet wird. Sie stehen im Markup **vor** den
+Ferien-Bannern, damit die Veranstaltung oben steht, wenn beide zugleich sichtbar sind. `daten.py` liest
+sie nicht, die neue Homepage zeigt sie also nicht. Uhrzeiten im Text als „18.00 Uhr“ schreiben, sonst
+blockiert `pruefen.py` („ab 18 Uhr“ gilt dort als unvollständige Uhrzeit).
+
+**Aktuell (Stand 12.11.2026):** `wbk-infoabend-2701`, Info- und Beratungsabend Do 14.01.2027 ab 18.00 Uhr
+in Münster (Terminplan WS 2026/27, dort „Informations- und Anmeldesprechstunde (Aufnahmeberatung)“).
+Sichtbar ab 12.11.2026 bis einschließlich 14.01.2027. Text durch den Humanizer; „ohne Termin“ bewusst
+weggelassen, weil nicht bestätigt. Geprüft per headless Chrome an 12.11., 22.12. 18.30 (zusammen mit
+dem Weihnachtsbanner), 07.01., 14.01. 23.59 (an), 15.01. 00.00 (aus). Danach Banner und Eintrag entfernen.
+
 **Ferienhinweise** (keine Sprechstunden in den Ferien) laufen über dieses Banner, nicht über
 `ausfaelle`: Es steht über allen Screens und gilt damit für Münster, Rheine und die Sprechstunde
 für Geflüchtete zugleich. Je Ferien ein eigenes Banner (`id`) plus ein Eintrag im Script-Array

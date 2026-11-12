@@ -84,6 +84,10 @@
   <h2 id="wbk-heading" style="font-size: 22px; font-weight: 500; color: #1a1a1a; margin: 0 0 0.5rem !important;">Finde deine Beratungssprechstunde</h2>
   <p id="wbk-intro" style="font-size: 15px; color: #555; margin: 0 0 1.5rem !important; line-height: 1.6;">Beantworte zwei kurze Fragen &#8211; wir zeigen dir dann direkt, welche Sprechstunde f&#252;r dich die richtige ist und wann du vorbeikommen kannst.</p>
   <!-- Ferien-Banner: datumsgesteuert, siehe ferienBanner im Script unten -->
+  <div id="wbk-infoabend-2701" class="deadline-banner">
+    <span class="db-icon">&#128227;</span>
+    <span class="db-text"><strong>Info- und Beratungsabend am Donnerstag, 14. Januar 2027, ab 18.00 Uhr</strong> in M&#252;nster (Uppenkampstiege 21). Du kannst dich dort informieren, beraten lassen und anmelden.</span>
+  </div>
   <div id="wbk-herbstferien" class="deadline-banner">
     <span class="db-icon">&#127810;</span>
     <span class="db-text">In den Herbstferien vom <strong>19. bis 30. Oktober 2026</strong> finden keine Sprechstunden statt. Ab <strong>Montag, 2. November</strong>, gelten wieder die regul&#228;ren Sprechzeiten.</span>
@@ -339,6 +343,24 @@
     if (now >= ferienBanner[fb].von && now < ferienBanner[fb].bis) {
       var fbEl = document.getElementById(ferienBanner[fb].id);
       if (fbEl) fbEl.style.display = 'flex';
+    }
+  }
+
+  /* --- Termin-Banner oben (Veranstaltungen wie der Info- und Beratungsabend) ---
+     Sichtbar im Zeitfenster [von .. bis), Monate 0-basiert. Steht im Markup vor den
+     Ferien-Bannern. Nicht in sprechzeiten.json (daten.py liest nur ferienBanner).
+     Abgelaufene Eintraege samt Banner wieder entfernen. */
+  var terminBanner = [
+    /* Info- und Beratungsabend Do 14.01.2027 ab 18 Uhr (Terminplan WS 2026/27;
+       Sebastian, 12.11.2026: jetzt schon ankuendigen) */
+    { id: 'wbk-infoabend-2701',
+      von: new Date(2026, 10, 12),         // sofort
+      bis: new Date(2027, 0, 15) }         // ab Fr, 15. Januar 2027, 00:00 ausblenden
+  ];
+  for (var tb = 0; tb < terminBanner.length; tb++) {
+    if (now >= terminBanner[tb].von && now < terminBanner[tb].bis) {
+      var tbEl = document.getElementById(terminBanner[tb].id);
+      if (tbEl) tbEl.style.display = 'flex';
     }
   }
 
