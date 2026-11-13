@@ -56,9 +56,10 @@ bis 08:50 alt, ab 08:50:33 neu). Erst nach 5 Minuten auf der Homepage nachsehen.
 Die Sprechzeiten pflegst du weiter nur hier im Widget. Beim Commit schreibt `daten.py` daraus `sprechzeiten.json`:
 regelmäßige Sprechzeiten (Münster mit der Sprechstunde für Geflüchtete, Rheine mit Buchungslink), Semester, Ausfälle
 (`ausfaelle` mit Zeitfenster, Art und Hinweistext), Ferienhinweise (`ferienBanner`) und die Sommerpause. Die neue
-Homepage (Repo `SebboMS/wbk-homepage`, Entwurf auf wbkneu.wbk.ms) lädt die Datei von
-`https://raw.githubusercontent.com/SebboMS/wbk-homepage-widgets/main/sprechzeiten.json` und zeigt Sprechzeiten,
-Ausfälle und Ferien in ihrer eigenen Gestaltung. Klappt das Laden nicht, zeigt sie ihre feste Liste.
+Homepage (Repo `SebboMS/wbk-homepage`, Entwurf auf wbkneu.wbk.ms) lädt sie vom eigenen Server: Das
+Verwaltungsportal legt die Datei stündlich dorthin. Die Homepage zeigt Sprechzeiten, Ausfälle und Ferien in ihrer
+eigenen Gestaltung. Klappt das Laden nicht, zeigt sie ihre feste Liste. Eine Reserve direkt von GitHub gibt es seit
+13.11.2026 nicht mehr, weil die Datenschutzerklärung der Homepage „keine fremden Dienste“ zusagt.
 
 - Die Datei nie von Hand ändern; sie entsteht im pre-commit-Hook (`.githooks/pre-commit`: erst `pruefen.py`, dann
   `daten.py`, dann `git add sprechzeiten.json`). Von Hand: `python3 daten.py`, Abgleich: `python3 daten.py --pruefen`.
@@ -68,7 +69,7 @@ Ausfälle und Ferien in ihrer eigenen Gestaltung. Klappt das Laden nicht, zeigt 
   Meldung ab und der Commit geht nicht durch, bis das Skript angepasst ist.
 - Ein Ausfall nennt auf der Homepage die Person über die `lineIds` (`wbk-alg-ms-xx-line`). Ohne Hinweis-Box
   (`line-hidden`) verschwindet die Zeile dort einfach, wie im Widget.
-- Verzögerung wie beim Widget: bis zu 5 Minuten (Zwischenspeicher von raw.githubusercontent.com).
+- Verzögerung: bis zu einer Stunde, bis das Verwaltungsportal die neue Datei auf den Server der Homepage legt.
 
 Warum so und nicht umgekehrt: Das Widget läuft live auf wbk.ms. Es aus einer Datendatei aufzubauen, hätte es
 umgebaut; so bleibt es unverändert, und die Homepage folgt ihm. Eine Datenbank (Martins MySQL) wäre erst nötig, wenn
